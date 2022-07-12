@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">TunaCoffee</string>
+    <string name="home">Trang chủ</string>
+    <string name="Menu">Menu</string>
+    <string name="Cart">Giỏ hàng</string>
+    <string name="Order">Đơn hàng</string>
+    <string name="notification">Thông báo</string>
+    <string name="text">Đây là 1 đoạn text</string>
+    <string name="onboarding1">Thương hiệu bắt nguồn từ cà phê Việt Nam</string>
+    <string name="onboarding2">Cà Phê phin Highlands Coffee là sản phẩm được sản xuất theo công nghệ tiên tiến trên dây chuyền hiện đại</string>
+    <string name="onboarding3">Nguyên liệu tạo nên sản phẩm được chọn lọc kĩ càng từ những vườn cà phê chất lượng nhất của Việt Nam</string>
+    <string name="title1">Thức uống được yêu thích</string>
+    <string name="title2">Ưu đãi đặc biệt hôm nay</string>
+    <string name="title3">Khám phá thêm thức uống</string>
+    <string name="welcome">Chào bạn!</string>
+    <string name="welcome2">Tham gia chương trình thành viên của chúng tôi để tích điểm và nhận quà</string>
+    <string name="price">price</string>
+    <string name="VNĐ">VNĐ</string>
+    <string name="rating">rate</string>
+    <string name="quantity">quantity</string>
+    <string name="emailHint">Email</string>
+    <string name="password">Mật khẩu</string>
+    <string name="rePass">Nhập lại mật khẩu</string>
+    <string name="forgotPassword">Quên mật khẩu</string>
+    <string name="Register">Đăng ký</string>
+</resources>
