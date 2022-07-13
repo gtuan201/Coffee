@@ -2,6 +2,7 @@ package com.example.coffee.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +10,7 @@ import android.os.Handler;
 import com.example.coffee.R;
 import com.example.coffee.SharePreferenceCheckInstall;
 
+@SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {
 
     public static final String FIRST_INSTALL ="FIRST_INSTALL";

@@ -88,6 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     progressDialog.dismiss();
                                     uploadUserProfile();
                                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                    assert user != null;
                                     user.reload();
                                           user.sendEmailVerification()
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
