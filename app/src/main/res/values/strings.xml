@@ -23,4 +23,5 @@
     <string name="rePass">Nhập lại mật khẩu</string>
     <string name="forgotPassword">Quên mật khẩu</string>
     <string name="Register">Đăng ký</string>
+    <string name="Login">Đăng nhập</string>
 </resources>
