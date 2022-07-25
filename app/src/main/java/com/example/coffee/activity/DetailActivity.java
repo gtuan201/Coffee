@@ -28,10 +28,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
@@ -45,8 +47,10 @@ public class DetailActivity extends AppCompatActivity {
     private ViewPager2 viewPager2;
     private DetailViewPager2Adapter adapter;
     String name,price,rate,category,background;
-    String strQuantity,size = "",ice = "",note = "",totalPrice = "";
+    String strQuantity,size = "Nhỏ",ice = "30%",note = "",totalPrice = "";
     int quantityInt,totalPriceInt,priceInt;
+    long timestamp = System.currentTimeMillis();
+    boolean isInCart = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -206,34 +210,72 @@ public class DetailActivity extends AppCompatActivity {
         btAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                strQuantity = etQuantity.getText().toString().trim();
-                note = etNote.getText().toString().trim();
-                totalPrice = tvTotalPrice.getText().toString().trim();
-                String uid = FirebaseAuth.getInstance().getUid();
-                HashMap<String,Object> hashMap = new HashMap<>();
-                hashMap.put("name",name);
-                hashMap.put("quantity",strQuantity);
-                hashMap.put("size",size);
-                hashMap.put("ice",ice);
-                hashMap.put("note",note);
-                hashMap.put("totalPrice",totalPrice);
-                DatabaseReference reference =FirebaseDatabase.getInstance().getReference("User");
-                reference.child(uid).child("Cart").child(name)
-                        .setValue(hashMap)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(DetailActivity.this,"Thêm vào giỏ thành công!",Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(DetailActivity.this,"Thêm vào giỏ thất bại!",Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                isCheckCart(etQuantity,tvTotalPrice,etNote);
             }
         });
+    }
+
+    private void isCheckCart(EditText etQuantity, TextView tvTotalPrice, EditText etNote) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User");
+        reference.child(user.getUid()).child("Cart").child(name)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String strQuantityInCart = ""+snapshot.child("quantity").getValue();
+                        String strTotalPriceInCart = ""+snapshot.child("totalPrice").getValue();
+                        strQuantity = etQuantity.getText().toString().trim();
+                        note = etNote.getText().toString().trim();
+                        totalPrice = tvTotalPrice.getText().toString().trim();
+                        isInCart = snapshot.exists();
+                        if (isInCart){
+                            int quantityInCart = Integer.parseInt(strQuantityInCart);
+                            quantityInt = Integer.parseInt(strQuantity);
+                            int finalQuantityInCart = quantityInCart + quantityInt;
+                            strQuantity = String.valueOf(finalQuantityInCart);
+                            int totalPriceInCart = Integer.parseInt(strTotalPriceInCart);
+                            totalPriceInt = Integer.parseInt(totalPrice);
+                            int finalTotalPriceInCart = totalPriceInCart + totalPriceInt;
+                            totalPrice = String.valueOf(finalTotalPriceInCart);
+                            addToCart();
+                        }
+                        else {
+                            addToCart();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+    private void addToCart() {
+        String uid = FirebaseAuth.getInstance().getUid();
+        HashMap<String,Object> hashMap = new HashMap<>();
+//        hashMap.put("coffeeID",""+timestamp);
+        hashMap.put("name",name);
+        hashMap.put("quantity",strQuantity);
+        hashMap.put("size",size);
+        hashMap.put("ice",ice);
+        hashMap.put("note",note);
+        hashMap.put("totalPrice",totalPrice);
+        DatabaseReference reference =FirebaseDatabase.getInstance().getReference("User");
+        reference.child(uid).child("Cart").child(name)
+                .setValue(hashMap)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(DetailActivity.this,"Thêm vào giỏ thành công!",Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(DetailActivity.this,"Thêm vào giỏ thất bại!",Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void displayTotalPrice(RadioButton btSmallSize, RadioButton btMediumSize, RadioButton btBigSize, EditText etQuantity, TextView tvTotalPrice) {
