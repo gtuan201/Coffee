@@ -8,6 +8,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -20,10 +21,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.coffee.R;
 import com.example.coffee.adapter.DetailViewPager2Adapter;
-import com.example.coffee.model.Coffee;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -33,7 +32,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
@@ -46,11 +44,12 @@ public class DetailActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
     private DetailViewPager2Adapter adapter;
-    String name,price,rate,category,background;
-    String strQuantity,size = "Nhỏ",ice = "30%",note = "",totalPrice = "";
+    String name,price,rate,category,background,img;
     int quantityInt,totalPriceInt,priceInt;
-    long timestamp = System.currentTimeMillis();
+    String strQuantity,size = "Nhỏ",ice = "30%",note = "",totalPrice = "";
+    String coffeeID = ""+ 1000;
     boolean isInCart = false;
+    int quantityInCart,finalQuantityInCart,totalPriceInCart,finalTotalPriceInCart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +72,7 @@ public class DetailActivity extends AppCompatActivity {
                .addListenerForSingleValueEvent(new ValueEventListener() {
                    @Override
                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                       img = ""+snapshot.child("ImgUrl").getValue();
                        category = ""+snapshot.child("category").getValue();
                        rate = ""+snapshot.child("rate").getValue();
                        price = ""+snapshot.child("price").getValue();
@@ -120,6 +120,7 @@ public class DetailActivity extends AppCompatActivity {
         BottomSheetDialog bottomSheetAdd = new BottomSheetDialog(this);
         bottomSheetAdd.setContentView(bottomSheet);
         bottomSheetAdd.show();
+        size = "Nhỏ"; ice = "30%";
         ImageButton btDecrease = bottomSheet.findViewById(R.id.btDecrease);
         ImageButton btIncrease = bottomSheet.findViewById(R.id.btIncrease);
         RadioGroup sizeGroup = bottomSheet.findViewById(R.id.sizeGroup);
@@ -218,29 +219,34 @@ public class DetailActivity extends AppCompatActivity {
     private void isCheckCart(EditText etQuantity, TextView tvTotalPrice, EditText etNote) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User");
-        reference.child(user.getUid()).child("Cart").child(name)
+        reference.child(user.getUid()).child("Cart").child(coffeeID)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String strQuantityInCart = ""+snapshot.child("quantity").getValue();
+                        String strSizeInCart = ""+snapshot.child("size").getValue();
+                        String strIceInCart = ""+snapshot.child("ice").getValue();
                         String strTotalPriceInCart = ""+snapshot.child("totalPrice").getValue();
                         strQuantity = etQuantity.getText().toString().trim();
                         note = etNote.getText().toString().trim();
                         totalPrice = tvTotalPrice.getText().toString().trim();
                         isInCart = snapshot.exists();
-                        if (isInCart){
-                            int quantityInCart = Integer.parseInt(strQuantityInCart);
+                        if (isInCart && strIceInCart.equals(ice) && strSizeInCart.equals(size)){
+                            quantityInCart = Integer.parseInt(strQuantityInCart);
                             quantityInt = Integer.parseInt(strQuantity);
-                            int finalQuantityInCart = quantityInCart + quantityInt;
+                            finalQuantityInCart = quantityInCart + quantityInt;
                             strQuantity = String.valueOf(finalQuantityInCart);
-                            int totalPriceInCart = Integer.parseInt(strTotalPriceInCart);
+                            totalPriceInCart = Integer.parseInt(strTotalPriceInCart);
                             totalPriceInt = Integer.parseInt(totalPrice);
-                            int finalTotalPriceInCart = totalPriceInCart + totalPriceInt;
+                            finalTotalPriceInCart = totalPriceInCart + totalPriceInt;
                             totalPrice = String.valueOf(finalTotalPriceInCart);
                             addToCart();
+                            Toast.makeText(DetailActivity.this,"Update",Toast.LENGTH_SHORT).show();
                         }
                         else {
+                            coffeeID = String.valueOf(Integer.parseInt(coffeeID)+1);
                             addToCart();
+                            Toast.makeText(DetailActivity.this,"Add",Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -251,10 +257,12 @@ public class DetailActivity extends AppCompatActivity {
                 });
     }
 
+
     private void addToCart() {
         String uid = FirebaseAuth.getInstance().getUid();
         HashMap<String,Object> hashMap = new HashMap<>();
-//        hashMap.put("coffeeID",""+timestamp);
+        hashMap.put("coffeeID",coffeeID);
+        hashMap.put("image",img);
         hashMap.put("name",name);
         hashMap.put("quantity",strQuantity);
         hashMap.put("size",size);
@@ -262,7 +270,7 @@ public class DetailActivity extends AppCompatActivity {
         hashMap.put("note",note);
         hashMap.put("totalPrice",totalPrice);
         DatabaseReference reference =FirebaseDatabase.getInstance().getReference("User");
-        reference.child(uid).child("Cart").child(name)
+        reference.child(uid).child("Cart").child(coffeeID)
                 .setValue(hashMap)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
