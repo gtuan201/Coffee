@@ -47,7 +47,7 @@ public class DetailActivity extends AppCompatActivity {
     String name,price,rate,category,background,img;
     int quantityInt,totalPriceInt,priceInt;
     String strQuantity,size = "Nhỏ",ice = "30%",note = "",totalPrice = "";
-    String coffeeID = ""+ 1000;
+    String coffeeID = "";
     boolean isInCart = false;
     int quantityInCart,finalQuantityInCart,totalPriceInCart,finalTotalPriceInCart;
     @Override
@@ -218,7 +218,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private void isCheckCart(EditText etQuantity, TextView tvTotalPrice, EditText etNote) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Order");
         reference.child(user.getUid()).child("Cart").child(coffeeID)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -240,11 +240,10 @@ public class DetailActivity extends AppCompatActivity {
                             totalPriceInt = Integer.parseInt(totalPrice);
                             finalTotalPriceInCart = totalPriceInCart + totalPriceInt;
                             totalPrice = String.valueOf(finalTotalPriceInCart);
-                            addToCart();
+                            updateCart();
                             Toast.makeText(DetailActivity.this,"Update",Toast.LENGTH_SHORT).show();
                         }
                         else {
-                            coffeeID = String.valueOf(Integer.parseInt(coffeeID)+1);
                             addToCart();
                             Toast.makeText(DetailActivity.this,"Add",Toast.LENGTH_SHORT).show();
                         }
@@ -257,9 +256,36 @@ public class DetailActivity extends AppCompatActivity {
                 });
     }
 
+    private void updateCart() {
+        String uid = FirebaseAuth.getInstance().getUid();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Order");
+        HashMap<String,Object> hashMap = new HashMap<>();
+        hashMap.put("quantity",strQuantity);
+        hashMap.put("size",size);
+        hashMap.put("ice",ice);
+        hashMap.put("note",note);
+        hashMap.put("totalPrice",totalPrice);
+        reference.child(uid).child("Cart").child(coffeeID)
+                .updateChildren(hashMap)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(DetailActivity.this,"Thêm vào giỏ thành công!",Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(DetailActivity.this,"Thêm vào giỏ thất bại!",Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
 
     private void addToCart() {
         String uid = FirebaseAuth.getInstance().getUid();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Order");
+        coffeeID = reference.push().getKey();
         HashMap<String,Object> hashMap = new HashMap<>();
         hashMap.put("coffeeID",coffeeID);
         hashMap.put("image",img);
@@ -269,7 +295,6 @@ public class DetailActivity extends AppCompatActivity {
         hashMap.put("ice",ice);
         hashMap.put("note",note);
         hashMap.put("totalPrice",totalPrice);
-        DatabaseReference reference =FirebaseDatabase.getInstance().getReference("User");
         reference.child(uid).child("Cart").child(coffeeID)
                 .setValue(hashMap)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
