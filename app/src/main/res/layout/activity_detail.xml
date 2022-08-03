@@ -26,26 +26,28 @@
             android:layout_marginTop="10dp"
             android:background="#00FFFFFF"
             android:src="@drawable/ic_baseline_arrow_back_ios_24" />
+
         <TextView
             android:id="@+id/location_detail"
-            android:text="@string/text"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:drawableStartCompat="@drawable/ic_baseline_location_on_24"
-            android:drawablePadding="5dp"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:drawablePadding="5dp"
+            android:text="@string/text"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_baseline_location_on_24" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btFavorite"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="15dp"
-            android:background="@drawable/ic_baseline_favorite_border_24"
-            android:layout_width="30dp"
-            android:layout_height="30dp"/>
+            android:background="@color/transparent" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -175,7 +177,8 @@
                 android:layout_height="match_parent" />
         </LinearLayout>
     <androidx.appcompat.widget.AppCompatButton
-        android:text="Thêm vào giỏ hàng"
+        android:id="@+id/bt_add_to_cart"
+        android:text="Tiến hành đặt hàng"
         android:textSize="17sp"
         android:textColor="@color/white"
         android:background="@drawable/button_custom2"

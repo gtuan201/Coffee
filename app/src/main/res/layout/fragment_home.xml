@@ -7,33 +7,40 @@
     tools:context=".fragment.HomeFragment"
     android:orientation="vertical"
     android:background="#171717">
+
     <RelativeLayout
-        android:background="@color/background"
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="60dp"
+        android:background="@color/background">
+
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginStart="15dp"
             android:text="@string/home"
-            android:layout_centerVertical="true"
+            android:drawablePadding="5dp"
+            android:textColor="@color/white"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            app:drawableStartCompat="@drawable/house" />
+
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="10dp">
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal">
+
             <ImageView
                 android:id="@+id/btSetting"
-                android:src="@drawable/ic_baseline_settings_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:src="@drawable/ic_baseline_settings_24" />
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/avatar_user"
                 android:layout_width="35dp"
@@ -43,16 +50,20 @@
                 app:civ_border_width="1dp" />
 
         </LinearLayout>
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/dark_grey" />
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.01dp"
         android:background="#494747" />
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="50dp">
+        android:layout_height="match_parent">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -91,7 +102,7 @@
                         android:background="@drawable/button_custom1"
                         android:paddingStart="20dp"
                         android:paddingEnd="20dp"
-                        android:text="Đăng nhập / Đăng ký"
+                        android:text="Đăng ký thành viên"
                         android:textAllCaps="false"
                         android:textColor="#F11D1D"
                         android:textSize="12sp" />
@@ -99,6 +110,7 @@
                 </LinearLayout>
 
                 <ImageButton
+                    android:id="@+id/btGoToInformationMembership"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -183,6 +195,21 @@
                 android:layout_marginEnd="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+            <ImageView
+                android:src="@drawable/ending_coffee"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="64dp"
+                android:layout_height="64dp"/>
+
+            <TextView
+                android:textStyle="italic"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Đến đây là hết rồi. Xin cảm ơn !"
+                android:textColor="#EF962B" />
 
         </LinearLayout>
 

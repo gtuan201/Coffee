@@ -13,18 +13,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.coffee.R;
 import com.example.coffee.activity.AdminActivity;
+import com.example.coffee.activity.LoginActivity;
 import com.example.coffee.activity.MainActivity;
+import com.example.coffee.activity.MemberActivity;
 import com.example.coffee.activity.RegisterActivity;
 import com.example.coffee.adapter.CoffeeHomeAdapter;
 import com.example.coffee.adapter.CoffeeHomeAdapter2;
 import com.example.coffee.model.Coffee;
 import com.example.coffee.model.News;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,6 +49,7 @@ public class HomeFragment extends Fragment {
 
 
     private CircleImageView avatar;
+    private ImageButton btGotoMember;
     private AppCompatButton btLoginRegister;
     private ImageView btSetting;
     private RecyclerView rev_home,rev_home2;
@@ -59,10 +64,19 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         avatar = view.findViewById(R.id.avatar_user);
         btSetting = view.findViewById(R.id.btSetting);
+        btGotoMember = view.findViewById(R.id.btGoToInformationMembership);
         btLoginRegister = view.findViewById(R.id.btLogin_SignUp_Home_Page);
         imageSlider = view.findViewById(R.id.slider_news);
         rev_home = view.findViewById(R.id.rev_home);
         rev_home2 = view.findViewById(R.id.rev_home2);
+        btGotoMember.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+                firebaseAuth.signOut();
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+            }
+        });
         btSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

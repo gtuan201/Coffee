@@ -1,11 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:text="Search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    android:layout_height="match_parent"
+    android:background="#171717">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15sp"
+            android:text="Khám phá"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/milktea" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btSearchMenu"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="60dp"
+            android:background="@drawable/search2" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btFavoriteMenu"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15sp"
+            android:background="@drawable/ic_baseline_favorite_24" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/dark_grey" />
+    </RelativeLayout>
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_menu"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:tabBackground="@drawable/tab_backgroud"
+        android:background="@color/transparent"
+        app:tabSelectedTextColor="#FA9C9C"
+        app:tabTextColor="@color/grey"
+        app:tabIndicatorColor="#00FFFFFF"
+        android:layout_width="match_parent"
+        app:tabGravity="center"
+        android:textAlignment="center"
+        app:tabPaddingStart="3dp"
+        app:tabPaddingEnd="3dp"
+        app:tabMode="scrollable"
+        android:layout_height="wrap_content"/>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vpg_tabmenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>

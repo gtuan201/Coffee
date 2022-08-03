@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Coffee">
         <activity
+            android:name=".activity.SearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.FavouriteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.MemberActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.RegisterActivity"
             android:exported="false" />
         <activity

@@ -1,6 +1,7 @@
 package com.example.coffee.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.coffee.R;
+import com.example.coffee.activity.DetailActivity;
 import com.example.coffee.model.Coffee;
 import com.makeramen.roundedimageview.RoundedImageView;
 
@@ -42,6 +44,14 @@ public class CoffeeHomeAdapter2 extends RecyclerView.Adapter<CoffeeHomeAdapter2.
         }
         holder.name.setText(coffee.getCoffeeName());
         Glide.with(holder.imgView).load(coffee.getUrlImg()).error(R.drawable.error_img).into(holder.imgView);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetailActivity.class);
+                intent.putExtra("name",coffee.getCoffeeName());
+                context.startActivities(new Intent[]{intent});
+            }
+        });
 
     }
 

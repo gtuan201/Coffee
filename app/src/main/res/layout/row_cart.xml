@@ -19,7 +19,7 @@
             android:scaleType="centerCrop"
             android:src="@drawable/ic_launcher_background" />
         <LinearLayout
-            android:layout_toRightOf="@id/img_cart"
+            android:layout_toEndOf="@id/img_cart"
             android:orientation="vertical"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"

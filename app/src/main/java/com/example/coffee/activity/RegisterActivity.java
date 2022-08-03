@@ -39,7 +39,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
-    private EditText email,password,rePassword;
+    private EditText email,password,rePassword,fullname;
     private AppCompatButton btRegister;
     private TextView login;
     private FirebaseAuth firebaseAuth;
@@ -50,6 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         email = findViewById(R.id.etEmailRegister);
+        fullname = findViewById(R.id.etFullnameRegister);
         password = findViewById(R.id.etPasswordRegister);
         rePassword = findViewById(R.id.etRePasswordRegister);
         btRegister = findViewById(R.id.btRegister);
@@ -67,10 +68,13 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String strEmail = email.getText().toString().trim();
+                String strFullname = fullname.getText().toString().trim();
                 String strPass = password.getText().toString().trim();
                 String strRepass = rePassword.getText().toString().trim();
                 if (TextUtils.isEmpty(strEmail))
                     Toast.makeText(RegisterActivity.this,"Vui lòng nhập email của bạn!",Toast.LENGTH_SHORT).show();
+                else if (TextUtils.isEmpty(strFullname))
+                    Toast.makeText(RegisterActivity.this,"Vui lòng nhập họ và tên",Toast.LENGTH_SHORT).show();
                 else if (TextUtils.isEmpty(strPass))
                     Toast.makeText(RegisterActivity.this,"Vui lòng nhập mật khẩu",Toast.LENGTH_SHORT).show();
                 else if (TextUtils.isEmpty(strRepass))
@@ -86,22 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(AuthResult authResult) {
                                     progressDialog.dismiss();
-                                    uploadUserProfile();
-                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                    assert user != null;
-                                    user.reload();
-                                          user.sendEmailVerification()
-                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    if (task.isSuccessful()){
-                                                        Toast.makeText(RegisterActivity.this,"Đăng ký thành công! Vui lòng xác thực email",Toast.LENGTH_SHORT).show();
-                                                    }
-                                                    else {
-                                                        Toast.makeText(RegisterActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                                                    }
-                                                }
-                                            });
+                                    uploadUserProfile(strFullname);
                                     new Handler().postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
@@ -123,11 +112,11 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void uploadUserProfile() {
+    private void uploadUserProfile(String strFullname) {
         String uid = firebaseAuth.getUid();
         HashMap<String,Object> hashMap = new HashMap<>();
         hashMap.put("uid",uid);
-        hashMap.put("user_name","");
+        hashMap.put("user_name",strFullname);
         hashMap.put("imgUser","");
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User");
         reference.child(""+uid)
@@ -135,7 +124,7 @@ public class RegisterActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-
+                        Toast.makeText(RegisterActivity.this,"Đăng ký thành công",Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

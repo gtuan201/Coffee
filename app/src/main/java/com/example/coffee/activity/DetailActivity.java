@@ -48,8 +48,7 @@ public class DetailActivity extends AppCompatActivity {
     int quantityInt,totalPriceInt,priceInt;
     String strQuantity,size = "Nhỏ",ice = "30%",note = "",totalPrice = "";
     String coffeeID = "";
-    boolean isInCart = false;
-    int quantityInCart,finalQuantityInCart,totalPriceInCart,finalTotalPriceInCart;
+    boolean isInCart = false, isFavourite = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,6 +111,85 @@ public class DetailActivity extends AppCompatActivity {
                 openBottomSheet();
             }
         });
+        isCheckFavourite();
+        btFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isFavourite){
+                    removeFavourite();
+                }
+                else {
+                    addFavourite();
+                }
+                isCheckFavourite();
+            }
+        });
+    }
+
+    private void addFavourite() {
+        HashMap<Object,String> hashMap = new HashMap<>();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        hashMap.put("name",name);
+        reference.child(user.getUid()).child("Favourite").child(name)
+                .setValue(hashMap)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(DetailActivity.this,"Đã thêm " + name +" vào ưa thích!",Toast.LENGTH_SHORT ).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(DetailActivity.this,"Thất bại khi thêm vào ưu thích",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+    }
+    private void removeFavourite() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        reference.child(user.getUid()).child("Favourite")
+                .child(name)
+                .removeValue()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(DetailActivity.this,"Đã xóa "+name+" khỏi ưa thích!",Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(DetailActivity.this,"Thất bại!",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
+
+    private void isCheckFavourite() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        reference.child(user.getUid()).child("Favourite").child(name)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        isFavourite = snapshot.exists();
+                        if (isFavourite){
+                            btFavorite.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.red_favourite,0,0);
+                        }
+                        else {
+                            btFavorite.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.ic_baseline_favorite_border_24,0,0);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
 
     private void openBottomSheet() {
@@ -227,18 +305,19 @@ public class DetailActivity extends AppCompatActivity {
                         String strSizeInCart = ""+snapshot.child("size").getValue();
                         String strIceInCart = ""+snapshot.child("ice").getValue();
                         String strTotalPriceInCart = ""+snapshot.child("totalPrice").getValue();
+                        String strName = ""+snapshot.child("name").getValue();
                         strQuantity = etQuantity.getText().toString().trim();
                         note = etNote.getText().toString().trim();
                         totalPrice = tvTotalPrice.getText().toString().trim();
                         isInCart = snapshot.exists();
-                        if (isInCart && strIceInCart.equals(ice) && strSizeInCart.equals(size)){
-                            quantityInCart = Integer.parseInt(strQuantityInCart);
+                        if (isInCart && strIceInCart.equals(ice) && strSizeInCart.equals(size) && strName.equals(name)){
+                            int quantityInCart = Integer.parseInt(strQuantityInCart);
                             quantityInt = Integer.parseInt(strQuantity);
-                            finalQuantityInCart = quantityInCart + quantityInt;
+                            int finalQuantityInCart = quantityInCart + quantityInt;
                             strQuantity = String.valueOf(finalQuantityInCart);
-                            totalPriceInCart = Integer.parseInt(strTotalPriceInCart);
+                            int totalPriceInCart = Integer.parseInt(strTotalPriceInCart);
                             totalPriceInt = Integer.parseInt(totalPrice);
-                            finalTotalPriceInCart = totalPriceInCart + totalPriceInt;
+                            int finalTotalPriceInCart = totalPriceInCart + totalPriceInt;
                             totalPrice = String.valueOf(finalTotalPriceInCart);
                             updateCart();
                             Toast.makeText(DetailActivity.this,"Update",Toast.LENGTH_SHORT).show();

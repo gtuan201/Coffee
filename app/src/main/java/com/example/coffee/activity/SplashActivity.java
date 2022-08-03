@@ -9,12 +9,13 @@ import android.os.Handler;
 
 import com.example.coffee.R;
 import com.example.coffee.SharePreferenceCheckInstall;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {
 
     public static final String FIRST_INSTALL ="FIRST_INSTALL";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +25,14 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if (preferenceCheckInstall.getBooleanValue(FIRST_INSTALL)){
-                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    if (user == null){
+                        startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                    }
+                    else {
+                        startActivity(new Intent(SplashActivity.this,MainActivity.class));
+                    }
+
                 }
                 else {
                     startActivity(new Intent(SplashActivity.this, OnBoardingActivity.class));

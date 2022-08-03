@@ -63,17 +63,8 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(AuthResult authResult) {
                                     progressDialog.dismiss();
-                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                    assert user != null;
-                                    if (user.isEmailVerified()){
-                                        startActivity(new Intent(LoginActivity.this,MainActivity.class));
-                                        finish();
-                                    }
-                                    else {
-                                        user.sendEmailVerification();
-                                        Toast.makeText(LoginActivity.this,"Vui lòng xác thực email của bạn",Toast.LENGTH_SHORT).show();
-                                    }
-
+                                    startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                                    finish();
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {

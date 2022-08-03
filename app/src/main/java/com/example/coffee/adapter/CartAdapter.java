@@ -1,6 +1,7 @@
 package com.example.coffee.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.coffee.R;
+import com.example.coffee.activity.DetailActivity;
 import com.example.coffee.model.Cart;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -54,6 +56,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.sizeCart.setText(String.format("Size: %s", cart.getSizeCart()));
         holder.iceCart.setText(String.format("Đá: %s", cart.getIceCart()));
         holder.quantityCart.setText(String.format("Số lượng: %s",cart.getQuantityCart()));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetailActivity.class);
+                intent.putExtra("name",cart.getNameCart());
+                context.startActivities(new Intent[]{intent});
+            }
+        });
         holder.btRemoveToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

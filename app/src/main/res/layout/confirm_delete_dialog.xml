@@ -21,7 +21,8 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btCancel"
             android:text="Hủy"
-            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textColor="@color/white"
             android:textAllCaps="false"
             android:layout_marginStart="20dp"
             android:background="@drawable/button_custom4"
@@ -31,6 +32,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btConfirm"
             android:text="Đồng ý"
+            android:textSize="16sp"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:background="@drawable/button_custom2"

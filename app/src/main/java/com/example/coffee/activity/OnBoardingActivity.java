@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.example.coffee.R;
 import com.example.coffee.adapter.OnBoardingViewPagerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -34,8 +36,15 @@ public class OnBoardingActivity extends AppCompatActivity {
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(OnBoardingActivity.this,MainActivity.class));
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user!=null){
+                    startActivity(new Intent(OnBoardingActivity.this,MainActivity.class));
+                }
+                else {
+                    startActivity(new Intent(OnBoardingActivity.this,LoginActivity.class));
+                }
                 finish();
+
             }
         });
         next.setOnClickListener(new View.OnClickListener() {

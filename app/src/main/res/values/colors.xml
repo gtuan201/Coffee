@@ -11,4 +11,11 @@
     <color name="background">#111111</color>
     <color name="light_brown">#FD6636</color>
     <color name="dark_brown">#AA4525</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="light_yellow">#FFF176</color>
+    <color name="light_blue">#64B5F6</color>
+    <color name="red">#ED1515</color>
+    <color name="blue">#097EFD</color>
+    <color name="grey">#B9B8B8</color>
+    <color name="dark_grey">#686868</color>
 </resources>

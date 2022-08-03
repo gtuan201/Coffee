@@ -19,9 +19,24 @@
     <string name="rating">rate</string>
     <string name="quantity">quantity</string>
     <string name="emailHint">Email</string>
+    <string name="fullname">Họ và tên</string>
     <string name="password">Mật khẩu</string>
     <string name="rePass">Nhập lại mật khẩu</string>
     <string name="forgotPassword">Quên mật khẩu</string>
     <string name="Register">Đăng ký</string>
     <string name="Login">Đăng nhập</string>
+    <string name="title_member">Thông tin về chương trình</string>
+    <string name="text2">text</string>
+    <string name="vat">Giá bán đã bao gồm thuế 8% VAT, áp dụng từ ngày 01/01/2022 đến 31/12/2022</string>
+    <string name="confirm_delete">Bạn có chắc muốn xóa tất cả không?</string>
+    <string name="phoneNumber">Số điện thoại nhận hàng</string>
+    <string name="address_order">Địa chỉ giao hàng</string>
+    <string name="payment">Đặt hàng</string>
+    <string name="complete_order">Hoàn tất quá trình đặt hàng</string>
+    <string name="product_favourite">Sản phẩm yêu thích</string>
+    <string name="Shipping">Giao hàng</string>
+    <string name="Pick_up_at_the_shop">Mang đi</string>
+    <string name="select_shop">Chọn cửa hàng đến lấy</string>
+    <string name="list_shop">Danh sách cửa hàng</string>
+    <string name="tuna_coffee_shop">Tuna Coffee Shop</string>
 </resources>
