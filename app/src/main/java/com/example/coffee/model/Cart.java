@@ -1,8 +1,11 @@
 package com.example.coffee.model;
 
+import android.widget.LinearLayout;
+
+import java.util.List;
+
 public class Cart {
     String coffeeID,imgCart,nameCart,sizeCart,iceCart,quantityCart,totalPriceCart,noteCart;
-
     public Cart() {
     }
 

@@ -1,4 +1,4 @@
-package com.example.coffee;
+package com.example.coffee.filter;
 
 import android.widget.Filter;
 

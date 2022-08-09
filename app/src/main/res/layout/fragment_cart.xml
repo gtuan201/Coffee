@@ -42,6 +42,30 @@
             android:layout_alignParentBottom="true"
             android:background="@color/dark_grey" />
     </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/layout_empty"
+        android:layout_below="@id/layout_head"
+        android:visibility="invisible"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal">
+        <ImageView
+            android:src="@drawable/emptybox"
+            android:layout_width="wrap_content"
+            android:layout_height="230dp"
+            android:layout_marginTop="70dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="70dp"
+            android:gravity="center_horizontal"
+            android:text="@string/empty_cart"
+            android:textColor="#FAEA63"
+            android:textSize="20sp"
+            android:textStyle="bold|italic" />
+    </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

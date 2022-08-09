@@ -1,12 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:text="write"
-        android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="#171717">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <TextView
+            android:text="@string/order_information"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15sp"
+            android:drawablePadding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:drawableStartCompat="@drawable/order1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/more_information"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15sp"
+            android:background="@drawable/ic_baseline_info_24" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/dark_grey" />
+    </RelativeLayout>
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_order"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:tabSelectedTextColor="#FA9C9C"
+        app:tabTextColor="@color/grey"
+        app:tabMode="scrollable"
+        android:background="@color/transparent"
+        android:textAlignment="center"
+        app:tabIndicatorHeight="1dp"
+        app:tabIndicatorColor="#FA9C9C"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
-
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vpg_order"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>

@@ -34,7 +34,7 @@
             <TextView
                 android:id="@+id/address_shop_bottom_sheet"
                 android:text="@string/text"
-                android:textColor="@color/white"
+                android:textColor="#D5D4D4"
                 android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

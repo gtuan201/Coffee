@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,7 +42,8 @@ public class BottomSheetShopFragment extends BottomSheetDialogFragment {
         View view1 = LayoutInflater.from(getContext()).inflate(R.layout.bottom_sheet_list_shop,null);
         bottomSheetDialog.setContentView(view1);
         RecyclerView rev_list_shop = view1.findViewById(R.id.rev_shop_bottom_sheet);
-        TextView tvCloseSheet = view1.findViewById(R.id.tvCloseSheet);
+        SearchView searchView = view1.findViewById(R.id.search_view_shop_bottom_sheet);
+        TextView tvClose = view1.findViewById(R.id.tvCloseSheet);
         LinearLayoutManager manager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         rev_list_shop.setLayoutManager(manager);
         shopList = new ArrayList<>();
@@ -60,7 +62,7 @@ public class BottomSheetShopFragment extends BottomSheetDialogFragment {
                     shop.setAddress(addressShop);
                     shopList.add(shop);
                 }
-                shopAdapter = new ShopAdapter(shopList, getContext(), new OnItemClickListener() {
+                shopAdapter = new ShopAdapter(shopList,shopList, getContext(), new OnItemClickListener() {
                     @Override
                     public void OnClickItem(Shop shop) {
                         listener.OnClickItem(shop);
@@ -75,7 +77,20 @@ public class BottomSheetShopFragment extends BottomSheetDialogFragment {
 
             }
         });
-        tvCloseSheet.setOnClickListener(new View.OnClickListener() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                shopAdapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                shopAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        tvClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 bottomSheetDialog.dismiss();

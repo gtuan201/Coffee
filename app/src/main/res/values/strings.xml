@@ -35,8 +35,15 @@
     <string name="complete_order">Hoàn tất quá trình đặt hàng</string>
     <string name="product_favourite">Sản phẩm yêu thích</string>
     <string name="Shipping">Giao hàng</string>
-    <string name="Pick_up_at_the_shop">Mang đi</string>
+    <string name="Pick_up_at_the_shop">Đến lấy</string>
     <string name="select_shop">Chọn cửa hàng đến lấy</string>
     <string name="list_shop">Danh sách cửa hàng</string>
     <string name="tuna_coffee_shop">Tuna Coffee Shop</string>
+    <string name="empty_cart">Không có sản phẩm nào trong giỏ hàng</string>
+    <string name="order_information">Thông tin đơn hàng</string>
+    <string name="detail_order">Chi tiết đơn hàng</string>
+    <string name="cancel_order">Hủy đơn hàng</string>
+    <string name="purchase_method_ship">Phương thức mua hàng: Giao hàng</string>
+    <string name="purchase_method_pick_up">Phương thức mua hàng: Tới cửa hàng lấy</string>
+    <string name="cancel_text">Đơn hàng chỉ có thể hủy khi đang ở trạng thái chuẩn bị thức uống !</string>
 </resources>

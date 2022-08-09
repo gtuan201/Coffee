@@ -13,9 +13,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="5dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="15sp"
+            android:drawablePadding="5dp"
             android:text="Khám phá"
             android:textColor="@color/white"
             android:textSize="22sp"

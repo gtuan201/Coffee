@@ -4,20 +4,23 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#272727">
+    android:background="#272727"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="0dp"
+    app:layout_behavior="androidx.support.design.widget.BottomSheetBehavior">>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view_shop_bottom_sheet"
             android:layout_width="320dp"
-            android:background="@drawable/custom_edit_text3"
             android:layout_height="40dp"
-            android:layout_margin="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
+            android:background="@drawable/custom_edit_text3"
             app:queryHint="Tìm kiếm" />
 
         <TextView

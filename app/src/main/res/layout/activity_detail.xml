@@ -24,21 +24,9 @@
             android:layout_height="30dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
-            android:background="#00FFFFFF"
+            android:background="@color/transparent"
+            android:paddingStart="7dp"
             android:src="@drawable/ic_baseline_arrow_back_ios_24" />
-
-        <TextView
-            android:id="@+id/location_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:drawablePadding="5dp"
-            android:text="@string/text"
-            android:textColor="@color/white"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:drawableStartCompat="@drawable/ic_baseline_location_on_24" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btFavorite"

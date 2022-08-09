@@ -1,13 +1,11 @@
 package com.example.coffee.adapter;
 
-import static android.content.Context.MODE_PRIVATE;
-
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,22 +13,24 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.coffee.filter.FilterShop;
 import com.example.coffee.OnItemClickListener;
 import com.example.coffee.R;
-import com.example.coffee.fragment.CartFragment;
 import com.example.coffee.model.Shop;
 
 import java.util.List;
 
-public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder>{
+public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder> implements Filterable {
 
 
-    private List<Shop> shopList;
+    public List<Shop> shopList,shopFilterList;
     private Context context;
     private OnItemClickListener listener;
+    private FilterShop filterShop;
 
-    public ShopAdapter(List<Shop> shopList, Context context, OnItemClickListener listener) {
+    public ShopAdapter(List<Shop> shopList, List<Shop> shopFilterList, Context context, OnItemClickListener listener) {
         this.shopList = shopList;
+        this.shopFilterList = shopFilterList;
         this.context = context;
         this.listener = listener;
     }
@@ -54,7 +54,6 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = shop.getName();
                 listener.OnClickItem(shop);
             }
         });
@@ -78,4 +77,12 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
             nameShop = view.findViewById(R.id.name_shop_bottom_sheet);
         }
     }
+    @Override
+    public Filter getFilter() {
+        if (filterShop==null){
+            filterShop = new FilterShop(shopFilterList,this);
+        }
+        return filterShop;
+    }
+
 }
