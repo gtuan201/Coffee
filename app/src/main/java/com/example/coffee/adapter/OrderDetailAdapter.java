@@ -1,5 +1,7 @@
 package com.example.coffee.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.coffee.R;
+import com.example.coffee.activity.DetailActivity;
 import com.example.coffee.model.Cart;
 
 import java.util.List;
@@ -19,9 +22,10 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
 
 
     private final List<Cart> list;
-
-    public OrderDetailAdapter(List<Cart> list) {
+    private Context context;
+    public OrderDetailAdapter(List<Cart> list, Context context) {
         this.list = list;
+        this.context = context;
     }
 
     @NonNull
@@ -43,6 +47,14 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
         holder.sizeCoffee.setText(String.format("Size: %s", cart.getSizeCart()));
         holder.iceCoffee.setText(String.format("Đá: %s", cart.getIceCart()));
         holder.quantityCoffee.setText(String.format("Số lượng: %s",cart.getQuantityCart()));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetailActivity.class);
+                intent.putExtra("name",cart.getNameCart());
+                context.startActivities(new Intent[]{intent});
+            }
+        });
     }
 
     @Override

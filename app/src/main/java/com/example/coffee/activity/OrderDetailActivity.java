@@ -24,25 +24,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDetailActivity extends AppCompatActivity {
-
-    private TextView test;
     private AppCompatButton btBack;
+    private TextView timeOrder;
     private RecyclerView rev_order_detail;
     private OrderDetailAdapter adapter;
     private List<Cart> list;
-    private String imgUrl,name,size,ice,quantity,totalPrice;
+    private String imgUrl,name,size,ice,quantity,totalPrice,date,time;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
         btBack = findViewById(R.id.btBackOrderDetail);
+        timeOrder = findViewById(R.id.timeOrder);
         rev_order_detail = findViewById(R.id.rev_order_detail);
         LinearLayoutManager manager = new LinearLayoutManager(OrderDetailActivity.this,LinearLayoutManager.VERTICAL,false);
         rev_order_detail.setLayoutManager(manager);
-        test = findViewById(R.id.test);
         list = new ArrayList<>();
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
+        date = intent.getStringExtra("date");
+        time = intent.getStringExtra("time");
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Bill");
         reference.child("customer").child(id).child("coffee")
                 .addValueEventListener(new ValueEventListener() {
@@ -65,7 +66,7 @@ public class OrderDetailActivity extends AppCompatActivity {
                             cart.setTotalPriceCart(totalPrice);
                             list.add(cart);
                         }
-                        adapter = new OrderDetailAdapter(list);
+                        adapter = new OrderDetailAdapter(list,OrderDetailActivity.this);
                         rev_order_detail.setAdapter(adapter);
                         rev_order_detail.setHasFixedSize(true);
                     }
@@ -75,6 +76,7 @@ public class OrderDetailActivity extends AppCompatActivity {
 
                     }
                 });
+        timeOrder.setText(String.format("Thời gian đặt hàng : %s ngày %s", time, date));
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,27 +1,40 @@
 package com.example.coffee.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coffee.R;
 import com.example.coffee.activity.OrderDetailActivity;
 import com.example.coffee.model.Order;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.FileDescriptor;
 import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder>{
 
 
-    private List<Order> list;
-    private Context context;
+    private final List<Order> list;
+    private final Context context;
 
     public OrderAdapter(List<Order> list, Context context) {
         this.list = list;
@@ -42,6 +55,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             return;
         }
         String id = order.getId();
+        String date = order.getDate();
+        String time = order.getTime();
         holder.nameOrder.setText(order.getFullname());
         holder.phoneNumberOrder.setText(String.format("| SĐT: %s", order.getPhoneNumber()));
         holder.addressOrder.setText(order.getAddress());
@@ -60,15 +75,56 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             public void onClick(View v) {
                Intent intent = new Intent(context,OrderDetailActivity.class);
                intent.putExtra("id",id);
+               intent.putExtra("date",date);
+               intent.putExtra("time",time);
                context.startActivities(new Intent[]{intent});
 
             }
         });
-
+        if (order.getStatus().equals("Đang chuẩn bị thức uống")){
+            holder.btCancelOrder.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new AlertDialog.Builder(context)
+                            .setTitle("Bạn có muốn hủy đơn hàng không?")
+                            .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    removeOrder(id);
+                                    dialog.cancel();
+                                }
+                            })
+                            .setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            })
+                            .show();
+                }
+            });
+        }
+        else {
+            holder.btCancelOrder.setBackgroundResource(R.drawable.button_custom6);
+        }
     }
 
-    private void openDetailOrderBottomSheet() {
-
+    private void removeOrder(String id) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Bill");
+        reference.child("customer").child(id)
+                .removeValue()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(context,"Đã hủy đơn hàng thành công!",Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(context,"Hủy đơn hàng không thành công!",Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     @Override

@@ -13,6 +13,7 @@
         <entry key="..\:/Coffee/app/src/main/res/drawable/button_custom2.xml" value="0.2035" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/button_custom3.xml" value="0.2035" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/button_custom5.xml" value="0.1605" />
+        <entry key="..\:/Coffee/app/src/main/res/drawable/button_custom7.xml" value="0.1605" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/circle_background.xml" value="0.16" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/circle_background2.xml" value="0.16" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/circle_background3.xml" value="0.16" />
@@ -84,6 +85,7 @@
         <entry key="..\:/Coffee/app/src/main/res/layout/row_cart.xml" value="0.264" />
         <entry key="..\:/Coffee/app/src/main/res/layout/row_favourite.xml" value="0.264" />
         <entry key="..\:/Coffee/app/src/main/res/layout/row_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Coffee/app/src/main/res/layout/row_order_complete.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/row_order_detail.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/row_rev_home.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/row_rev_home2.xml" value="0.25416666666666665" />

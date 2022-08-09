@@ -3,13 +3,13 @@ package com.example.coffee.model;
 import java.util.List;
 
 public class Order {
-    String id,fullname,address,shopname,totalprice,phoneNumber,purchaseMethod,status;
+    String id,fullname,address,shopname,totalprice,phoneNumber,purchaseMethod,status,date,time;
     List<Cart> cartList;
 
     public Order() {
     }
 
-    public Order(String id, String fullname, String address, String shopname, String totalprice, String phoneNumber, String purchaseMethod, String status, List<Cart> cartList) {
+    public Order(String id, String fullname, String address, String shopname, String totalprice, String phoneNumber, String purchaseMethod, String status, String date, String time, List<Cart> cartList) {
         this.id = id;
         this.fullname = fullname;
         this.address = address;
@@ -18,6 +18,8 @@ public class Order {
         this.phoneNumber = phoneNumber;
         this.purchaseMethod = purchaseMethod;
         this.status = status;
+        this.date = date;
+        this.time = time;
         this.cartList = cartList;
     }
 
@@ -83,6 +85,22 @@ public class Order {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public List<Cart> getCartList() {

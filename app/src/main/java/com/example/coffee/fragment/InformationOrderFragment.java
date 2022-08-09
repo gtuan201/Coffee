@@ -62,12 +62,16 @@ public class InformationOrderFragment extends Fragment {
                     String status = ""+dataSnapshot.child("status").getValue();
                     String totalPriceOrder = ""+dataSnapshot.child("totalPrice").getValue();
                     String id = ""+dataSnapshot.child("id").getValue();
+                    String date = ""+dataSnapshot.child("date").getValue();
+                    String time = ""+dataSnapshot.child("time").getValue();
                     Order order = new Order();
                     order.setId(id);
                     order.setFullname(nameOrder);
                     order.setPhoneNumber(phoneOrder);
                     order.setTotalprice(totalPriceOrder);
                     order.setStatus(status);
+                    order.setDate(date);
+                    order.setTime(time);
                     order.setPurchaseMethod(purchaseMethod);
                     if (purchaseMethod.equals("ship")){
                         order.setAddress(addressOrder);
