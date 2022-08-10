@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Coffee/app/src/main/res/drawable-v24/button_custom4.xml" value="0.16" />
         <entry key="..\:/Coffee/app/src/main/res/drawable-v24/button_custom6.xml" value="0.1605" />
+        <entry key="..\:/Coffee/app/src/main/res/drawable-v24/button_custom9.xml" value="0.173" />
         <entry key="..\:/Coffee/app/src/main/res/drawable-v24/custom_edit_text4.xml" value="0.16" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/background_home.xml" value="0.2035" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/background_stepper_et.xml" value="0.2035" />
@@ -14,16 +15,21 @@
         <entry key="..\:/Coffee/app/src/main/res/drawable/button_custom3.xml" value="0.2035" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/button_custom5.xml" value="0.1605" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/button_custom7.xml" value="0.1605" />
+        <entry key="..\:/Coffee/app/src/main/res/drawable/button_custom8.xml" value="0.173" />
+        <entry key="..\:/Coffee/app/src/main/res/drawable/checkbox_selector.xml" value="0.173" />
+        <entry key="..\:/Coffee/app/src/main/res/drawable/checkbox_text_selector.xml" value="0.173" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/circle_background.xml" value="0.16" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/circle_background2.xml" value="0.16" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/circle_background3.xml" value="0.16" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/cirle_button.xml" value="0.2035" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/custom_edit_text3.xml" value="0.16" />
+        <entry key="..\:/Coffee/app/src/main/res/drawable/custom_edit_text5.xml" value="0.173" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/custom_search_view.xml" value="0.16" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/custom_textview.xml" value="0.159" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/divider.xml" value="0.16" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/edit_text_custom.xml" value="0.2035" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/ic_baseline_navigate_next_24.xml" value="0.2035" />
+        <entry key="..\:/Coffee/app/src/main/res/drawable/ic_baseline_photo_camera_24.xml" value="0.173" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.2035" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/ic_baseline_skip_next_24.xml" value="0.2035" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2035" />
@@ -50,6 +56,8 @@
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_member.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_on_boarding.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_order_detail.xml" value="0.25416666666666665" />
+        <entry key="..\:/Coffee/app/src/main/res/layout/activity_rate.xml" value="0.25416666666666665" />
+        <entry key="..\:/Coffee/app/src/main/res/layout/activity_rating.xml" value="0.264" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_register.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_search.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_splash.xml" value="0.25416666666666665" />
@@ -87,6 +95,7 @@
         <entry key="..\:/Coffee/app/src/main/res/layout/row_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/row_order_complete.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/row_order_detail.xml" value="0.25416666666666665" />
+        <entry key="..\:/Coffee/app/src/main/res/layout/row_rate_coffee.xml" value="0.264" />
         <entry key="..\:/Coffee/app/src/main/res/layout/row_rev_home.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/row_rev_home2.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/row_rev_infor_order.xml" value="0.25416666666666665" />

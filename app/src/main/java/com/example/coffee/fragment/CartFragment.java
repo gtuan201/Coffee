@@ -283,6 +283,7 @@ public class CartFragment extends Fragment{
         hashMap.put("status","Đang chuẩn bị thức uống");
         hashMap.put("date",""+saveCurrentDate);
         hashMap.put("time",""+saveCurrentTime);
+        hashMap.put("timeComplete","");
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Bill");
         reference.child("customer").child(""+timestamp)
                 .setValue(hashMap)

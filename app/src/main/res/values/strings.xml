@@ -16,7 +16,7 @@
     <string name="welcome2">Tham gia chương trình thành viên của chúng tôi để tích điểm và nhận quà</string>
     <string name="price">price</string>
     <string name="VNĐ">VNĐ</string>
-    <string name="rating">rate</string>
+    <string name="rating">Đánh giá</string>
     <string name="quantity">quantity</string>
     <string name="emailHint">Email</string>
     <string name="fullname">Họ và tên</string>
@@ -46,4 +46,10 @@
     <string name="purchase_method_ship">Phương thức mua hàng: Giao hàng</string>
     <string name="purchase_method_pick_up">Phương thức mua hàng: Tới cửa hàng lấy</string>
     <string name="cancel_text">Đơn hàng chỉ có thể hủy khi đang ở trạng thái chuẩn bị thức uống !</string>
+    <string name="rateForMore">Đánh giá đúng chất lượng giúp chúng tôi có thể tiếp tục phát huy ưu điểm và khắc phục những nhược điểm</string>
+    <string name="list_order">Danh sách sản phẩm</string>
+    <string name="rating_coffee">Đánh giá thức uống</string>
+    <string name="hintRate">Trải nghiệm của bạn về thức uống như thế nào?</string>
+    <string name="add_image">Đăng tải hình ảnh</string>
+    <string name="send_rate">Gửi đánh giá</string>
 </resources>

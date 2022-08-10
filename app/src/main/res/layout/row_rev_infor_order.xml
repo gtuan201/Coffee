@@ -20,7 +20,7 @@
                 <TextView
                     android:id="@+id/name_order"
                     android:text="Họ tên"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:layout_width="wrap_content"
@@ -29,7 +29,7 @@
                     android:id="@+id/sdt_order"
                     android:text="SĐT"
                     android:layout_marginStart="7dp"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     android:textColor="@color/grey"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>

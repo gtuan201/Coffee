@@ -65,21 +65,23 @@ public class InformationOrderFragment extends Fragment {
                     String date = ""+dataSnapshot.child("date").getValue();
                     String time = ""+dataSnapshot.child("time").getValue();
                     Order order = new Order();
-                    order.setId(id);
-                    order.setFullname(nameOrder);
-                    order.setPhoneNumber(phoneOrder);
-                    order.setTotalprice(totalPriceOrder);
-                    order.setStatus(status);
-                    order.setDate(date);
-                    order.setTime(time);
-                    order.setPurchaseMethod(purchaseMethod);
-                    if (purchaseMethod.equals("ship")){
-                        order.setAddress(addressOrder);
+                    if (!status.equals("Đã hoàn thành")){
+                        order.setId(id);
+                        order.setFullname(nameOrder);
+                        order.setPhoneNumber(phoneOrder);
+                        order.setTotalprice(totalPriceOrder);
+                        order.setStatus(status);
+                        order.setDate(date);
+                        order.setTime(time);
+                        order.setPurchaseMethod(purchaseMethod);
+                        if (purchaseMethod.equals("ship")){
+                            order.setAddress(addressOrder);
+                        }
+                        else if (purchaseMethod.equals("pick up")){
+                            order.setAddress(shopName);
+                        }
+                        list.add(order);
                     }
-                    else if (purchaseMethod.equals("pick up")){
-                        order.setAddress(shopName);
-                    }
-                    list.add(order);
                 }
                 adapter = new OrderAdapter(list,getContext());
                 rev_infor_order.setAdapter(adapter);
