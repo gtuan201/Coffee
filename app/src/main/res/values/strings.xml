@@ -52,4 +52,5 @@
     <string name="hintRate">Trải nghiệm của bạn về thức uống như thế nào?</string>
     <string name="add_image">Đăng tải hình ảnh</string>
     <string name="send_rate">Gửi đánh giá</string>
+    <string name="thanks">Cảm ơn bạn đã đánh giá sản phẩm của chúng tôi</string>
 </resources>

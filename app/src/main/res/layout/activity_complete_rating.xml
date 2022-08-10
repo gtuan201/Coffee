@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.CompleteRatingActivity"
+    android:background="#272727">
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btBackThanks"
+        android:background="@drawable/ic_baseline_clear_24"
+        android:layout_margin="10dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"/>
+    <ImageView
+        android:src="@drawable/thankyou"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"/>
+    <TextView
+        android:text="@string/thanks"
+        android:textStyle="bold|italic"
+        android:layout_marginHorizontal="40dp"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColor="#5A9E70"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
