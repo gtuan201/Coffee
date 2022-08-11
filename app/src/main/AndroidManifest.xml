@@ -13,9 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Coffee">
         <activity
-            android:name=".activity.CompleteRatingActivity"
-            android:exported="false" />
-        <activity
             android:name=".activity.RatingActivity"
             android:exported="false" />
         <activity

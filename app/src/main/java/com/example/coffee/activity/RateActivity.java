@@ -30,6 +30,7 @@ public class RateActivity extends AppCompatActivity {
     private RecyclerView rev_coffee_rate;
     private List<Cart> list;
     private CoffeeRateAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,19 +49,22 @@ public class RateActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         list.clear();
                         for (DataSnapshot dataSnapshot:snapshot.getChildren()){
-                            String imgUrl  = ""+dataSnapshot.child("imgCart").getValue();
-                            String name = ""+dataSnapshot.child("nameCart").getValue();
-                            String size = ""+dataSnapshot.child("sizeCart").getValue();
-                            String ice = ""+dataSnapshot.child("iceCart").getValue();
-                            String quantity = ""+dataSnapshot.child("quantityCart").getValue();
-                            String totalPrice = ""+dataSnapshot.child("totalPriceCart").getValue();
+                            String imgUrl  = ""+dataSnapshot.child("image").getValue();
+                            String name = ""+dataSnapshot.child("name").getValue();
+                            String size = ""+dataSnapshot.child("size").getValue();
+                            String ice = ""+dataSnapshot.child("ice").getValue();
+                            String quantity = ""+dataSnapshot.child("quantity").getValue();
+                            String totalPrice = ""+dataSnapshot.child("totalPrice").getValue();
+                            String status = ""+dataSnapshot.child("status").getValue();
                             Cart cart = new Cart();
+                            cart.setCoffeeID(id);
                             cart.setImgCart(imgUrl);
                             cart.setNameCart(name);
                             cart.setSizeCart(size);
                             cart.setIceCart(ice);
                             cart.setQuantityCart(quantity);
                             cart.setTotalPriceCart(totalPrice);
+                            cart.setStatus(status);
                             list.add(cart);
                         }
                         adapter = new CoffeeRateAdapter(list,RateActivity.this);

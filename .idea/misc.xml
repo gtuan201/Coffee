@@ -49,6 +49,7 @@
         <entry key="..\:/Coffee/app/src/main/res/drawable/text_selector.xml" value="0.159" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/unselected_tv.xml" value="0.159" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_admin.xml" value="0.25416666666666665" />
+        <entry key="..\:/Coffee/app/src/main/res/layout/activity_complete.xml" value="0.20863616930312098" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_complete_rating.xml" value="0.20863616930312098" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_detail.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_favourite.xml" value="0.25416666666666665" />
@@ -96,6 +97,7 @@
         <entry key="..\:/Coffee/app/src/main/res/layout/row_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/row_order_complete.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/row_order_detail.xml" value="0.25416666666666665" />
+        <entry key="..\:/Coffee/app/src/main/res/layout/row_purchase_history.xml" value="0.20863616930312098" />
         <entry key="..\:/Coffee/app/src/main/res/layout/row_rate_coffee.xml" value="0.264" />
         <entry key="..\:/Coffee/app/src/main/res/layout/row_rev_home.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/row_rev_home2.xml" value="0.25416666666666665" />

@@ -5,11 +5,11 @@ import android.widget.LinearLayout;
 import java.util.List;
 
 public class Cart {
-    String coffeeID,imgCart,nameCart,sizeCart,iceCart,quantityCart,totalPriceCart,noteCart;
+    String coffeeID,imgCart,nameCart,sizeCart,iceCart,quantityCart,totalPriceCart,noteCart,status;
     public Cart() {
     }
 
-    public Cart(String coffeeID, String imgCart, String nameCart, String sizeCart, String iceCart, String quantityCart, String totalPriceCart, String noteCart) {
+    public Cart(String coffeeID, String imgCart, String nameCart, String sizeCart, String iceCart, String quantityCart, String totalPriceCart, String noteCart, String status) {
         this.coffeeID = coffeeID;
         this.imgCart = imgCart;
         this.nameCart = nameCart;
@@ -18,6 +18,7 @@ public class Cart {
         this.quantityCart = quantityCart;
         this.totalPriceCart = totalPriceCart;
         this.noteCart = noteCart;
+        this.status = status;
     }
 
     public String getCoffeeID() {
@@ -82,5 +83,13 @@ public class Cart {
 
     public void setNoteCart(String noteCart) {
         this.noteCart = noteCart;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

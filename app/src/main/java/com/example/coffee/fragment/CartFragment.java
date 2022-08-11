@@ -111,6 +111,7 @@ public class CartFragment extends Fragment{
                             cart.setQuantityCart(strQuantity);
                             cart.setNoteCart(strNote);
                             cart.setTotalPriceCart(strTotalPrice);
+                            cart.setStatus("Chưa đánh giá");
                             cartList.add(cart);
                             int totalPrice = Integer.parseInt(strTotalPrice);
                             sum = sum + totalPrice;
@@ -276,7 +277,7 @@ public class CartFragment extends Fragment{
         hashMap.put("fullname",strNamePay);
         hashMap.put("address",""+strAddress);
         hashMap.put("phone",strPhone);
-        hashMap.put("coffee",cartList);
+//        hashMap.put("coffee",cartList);
         hashMap.put("purchase_method",purchase_method);
         hashMap.put("shopName",""+shopName);
         hashMap.put("totalPrice",strTotalPricePayment);
@@ -297,6 +298,40 @@ public class CartFragment extends Fragment{
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(getContext(),"Đặt hàng không thành công !",Toast.LENGTH_SHORT).show();
+                    }
+                });
+        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("Order");
+        reference1.child(user.getUid()).child("Cart")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+                            coffeeID = ""+dataSnapshot.child("coffeeID").getValue();
+                            strImg = "" + dataSnapshot.child("image").getValue();
+                            nameCart = "" +dataSnapshot.child("name").getValue();
+                            sizeCart = ""+dataSnapshot.child("size").getValue();
+                            iceCart = ""+dataSnapshot.child("ice").getValue();
+                            strQuantity = ""+dataSnapshot.child("quantity").getValue();
+                            strNote = ""+dataSnapshot.child("note").getValue();
+                            strTotalPrice = ""+dataSnapshot.child("totalPrice").getValue();
+                            HashMap<String,Object> map = new HashMap<>();
+                            map.put("coffeeID",coffeeID);
+                            map.put("image",strImg);
+                            map.put("name",nameCart);
+                            map.put("size",sizeCart);
+                            map.put("ice",iceCart);
+                            map.put("quantity",strQuantity);
+                            map.put("note",strNote);
+                            map.put("totalPrice",strTotalPrice);
+                            map.put("status","Chưa đánh giá");
+                            reference.child("customer").child(""+timestamp).child("coffee").child(nameCart)
+                                    .setValue(map);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
                     }
                 });
     }

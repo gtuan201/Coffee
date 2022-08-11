@@ -51,12 +51,12 @@ public class OrderDetailActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         list.clear();
                         for (DataSnapshot dataSnapshot:snapshot.getChildren()){
-                            imgUrl = ""+dataSnapshot.child("imgCart").getValue();
-                            name = ""+dataSnapshot.child("nameCart").getValue();
-                            size = ""+dataSnapshot.child("sizeCart").getValue();
-                            ice = ""+dataSnapshot.child("iceCart").getValue();
-                            quantity = ""+dataSnapshot.child("quantityCart").getValue();
-                            totalPrice = ""+dataSnapshot.child("totalPriceCart").getValue();
+                            imgUrl = ""+dataSnapshot.child("image").getValue();
+                            name = ""+dataSnapshot.child("name").getValue();
+                            size = ""+dataSnapshot.child("size").getValue();
+                            ice = ""+dataSnapshot.child("ice").getValue();
+                            quantity = ""+dataSnapshot.child("quantity").getValue();
+                            totalPrice = ""+dataSnapshot.child("totalPrice").getValue();
                             Cart cart = new Cart();
                             cart.setImgCart(imgUrl);
                             cart.setNameCart(name);

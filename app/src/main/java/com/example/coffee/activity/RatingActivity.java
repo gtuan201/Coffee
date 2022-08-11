@@ -8,10 +8,12 @@ import androidx.appcompat.widget.AppCompatRatingBar;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.CheckBox;
@@ -22,6 +24,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.coffee.R;
+import com.example.coffee.model.Cart;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -55,9 +58,10 @@ public class RatingActivity extends AppCompatActivity {
     private EditText stringRate;
     private AppCompatButton btAddImg,btBack,btReview;
     private CheckBox cb1,cb2,cb3,cb4,cb5;
-    private String strCb = "",uploadImgUrl,strReview,name;
+    private String strCb = "",uploadImgUrl,strReview,name,id;
     private Uri imgUri;
     private float rate;
+    private List<Cart> list;
     public static final int PICK_IMAGE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +83,11 @@ public class RatingActivity extends AppCompatActivity {
         cb3 = findViewById(R.id.cb3);
         cb4 = findViewById(R.id.cb4);
         cb5 = findViewById(R.id.cb5);
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setCanceledOnTouchOutside(false);
         Intent intent = getIntent();
         name = intent.getStringExtra("name");
+        id = intent.getStringExtra("id");
         String img = intent.getStringExtra("imgUrl");
         String size = intent.getStringExtra("size");
         String ice = intent.getStringExtra("ice");
@@ -99,14 +106,20 @@ public class RatingActivity extends AppCompatActivity {
             if (rate  < 1){
                 Toast.makeText(RatingActivity.this,"Hãy đánh giá chất lượng coffee!",Toast.LENGTH_SHORT).show();
             }
+            else if (imgUri == null){
+                Toast.makeText(RatingActivity.this,"Hãy thêm 1 tấm ảnh",Toast.LENGTH_SHORT).show();
+            }
             else {
-                uploadImgToDB();
+                progressDialog.setTitle("Đang gửi đánh giá của bạn");
+                progressDialog.setMessage("Vui lòng đợi!");
+                progressDialog.show();
+                uploadImgToDB(progressDialog);
             }
         });
 
     }
 
-    private void uploadImgToDB() {
+    private void uploadImgToDB(ProgressDialog progressDialog) {
         long timestamp = System.currentTimeMillis();
         String filePath = "ImgReview/"+timestamp;
         StorageReference storageReference = FirebaseStorage.getInstance().getReference(filePath);
@@ -115,7 +128,7 @@ public class RatingActivity extends AppCompatActivity {
                     Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
                     while (!uriTask.isSuccessful());
                     uploadImgUrl = ""+uriTask.getResult();
-                    uploadToRealtime(uploadImgUrl);
+                    uploadToRealtime(uploadImgUrl,progressDialog);
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -125,13 +138,14 @@ public class RatingActivity extends AppCompatActivity {
                 });
     }
 
-    private void uploadToRealtime(String uploadImgUrl) {
+    private void uploadToRealtime(String uploadImgUrl, ProgressDialog progressDialog) {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
         String saveCurrentDate = currentDate.format(calendar.getTime());
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
         String saveCurrentTime = currentTime.format(calendar.getTime());
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Bill");
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Coffee");
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
         ref.child(user.getUid())
@@ -156,16 +170,27 @@ public class RatingActivity extends AppCompatActivity {
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
-                                        startActivity(new Intent(RatingActivity.this,CompleteRatingActivity.class));
-                                        finish();
+                                        progressDialog.dismiss();
+                                        Toast.makeText(RatingActivity.this,"Gửi thành công! Cảm ơn bạn đã đánh giá",Toast.LENGTH_SHORT).show();
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                onBackPressed();
+                                            }
+                                        },1900);
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
+                                        progressDialog.dismiss();
                                         Toast.makeText(RatingActivity.this,"Lỗi! Không gửi được đánh giá",Toast.LENGTH_SHORT).show();
                                     }
                                 });
+                        HashMap<String,Object> map = new HashMap<>();
+                        map.put("status","Đã đánh giá");
+                        databaseReference.child("customer").child(id).child("coffee").child(name)
+                                .updateChildren(map);
                     }
 
                     @Override

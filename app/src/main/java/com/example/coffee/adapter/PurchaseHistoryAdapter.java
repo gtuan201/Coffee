@@ -45,7 +45,7 @@ public class PurchaseHistoryAdapter extends RecyclerView.Adapter<PurchaseHistory
         holder.sdt.setText(String.format("| SĐT: %s", order.getPhoneNumber()));
         holder.address.setText(order.getAddress());
         holder.status.setText(String.format("Trạng thái: %s", order.getStatus()));
-        holder.timeComplete.setText(String.format("Thời gian đơn hàng hoàn thành là : %s .", order.getTimeCompleteOrder()));
+        holder.timeComplete.setText(String.format("Thời gian đơn hàng hoàn thành là : %s", order.getTimeCompleteOrder()));
         if (order.getPurchaseMethod().equals("ship")){
             holder.purchase_method.setText(R.string.purchase_method_ship);
             holder.img.setImageResource(R.drawable.delivery);

@@ -16,6 +16,12 @@ import com.bumptech.glide.Glide;
 import com.example.coffee.R;
 import com.example.coffee.activity.RatingActivity;
 import com.example.coffee.model.Cart;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -50,12 +56,29 @@ public class CoffeeRateAdapter extends RecyclerView.Adapter<CoffeeRateAdapter.Co
         holder.totalPrice.setText(String.format("Thành tiền: %s VNĐ", cart.getTotalPriceCart()));
         holder.btRating.setOnClickListener(v -> {
             Intent intent = new Intent(context, RatingActivity.class);
+            intent.putExtra("id",cart.getCoffeeID());
             intent.putExtra("imgUrl",cart.getImgCart());
             intent.putExtra("name",cart.getNameCart());
             intent.putExtra("size",cart.getSizeCart());
             intent.putExtra("ice",cart.getIceCart());
             intent.putExtra("quantity",cart.getQuantityCart());
             context.startActivities(new Intent[]{intent});
+        });
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Coffee");
+        Query query =  reference.child(cart.getNameCart()).child("Review").orderByChild("status").equalTo("Đã đánh giá");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean isReview = snapshot.exists();
+                if (isReview){
+                    holder.btRating.setText("Đã đánh giá");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
         });
     }
 
