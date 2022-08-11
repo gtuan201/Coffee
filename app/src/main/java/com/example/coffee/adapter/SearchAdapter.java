@@ -50,6 +50,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         holder.descriptionSearch.setText(coffee.getCoffeeDescription());
         holder.priceSearch.setText(coffee.getPrice());
         holder.categorySearch.setText(coffee.getCategory());
+        if (coffee.getRate().equals("")){
+            holder.ratingSearch.setText("0");
+        }
+        else {
+            holder.ratingSearch.setText(coffee.getRate());
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +77,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
     public static class SearchViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imgSearch;
-        TextView nameSearch,descriptionSearch,priceSearch,categorySearch;
+        TextView nameSearch,descriptionSearch,priceSearch,categorySearch,ratingSearch;
         public SearchViewHolder(@NonNull View view) {
             super(view);
             imgSearch = view.findViewById(R.id.img_search);
@@ -79,6 +85,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
             descriptionSearch = view.findViewById(R.id.description_search);
             priceSearch = view.findViewById(R.id.priceSearch);
             categorySearch = view.findViewById(R.id.category_search);
+            ratingSearch = view.findViewById(R.id.tvRatingSearch);
         }
     }
 

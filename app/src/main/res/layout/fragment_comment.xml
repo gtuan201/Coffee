@@ -3,12 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#1B1A1A"
-    android:padding="10dp">
+    android:background="#1B1A1A">
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rev_comment"
+        android:id="@+id/rev_review"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
-
 </LinearLayout>

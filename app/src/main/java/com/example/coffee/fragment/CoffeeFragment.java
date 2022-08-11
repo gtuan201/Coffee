@@ -52,7 +52,7 @@ public class CoffeeFragment extends Fragment {
                             coffee.setUrlImg(imgUrl);
                             coffee.setCoffeeName(name);
                             coffee.setPrice(strPrice);
-//                            coffee.setRate(strRate);
+                            coffee.setRate(strRate);
                             list.add(coffee);
                         }
                         adapter = new MenuAdapter(list,getContext());

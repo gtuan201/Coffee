@@ -14,17 +14,17 @@
         <ImageView
             android:id="@+id/img_detail"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="243dp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_launcher_background" />
 
         <ImageButton
             android:id="@+id/btBackDetail"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
-            android:background="@color/transparent"
+            android:background="@drawable/circle_background2"
             android:paddingStart="7dp"
             android:src="@drawable/ic_baseline_arrow_back_ios_24" />
 
@@ -43,11 +43,12 @@
         android:layout_height="match_parent"
         android:layout_marginTop="230dp"
         android:background="@drawable/rounded_top_background"
-        android:padding="13dp">
+        android:padding="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_above="@id/bt_add_to_cart"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -62,7 +63,7 @@
                     android:layout_centerVertical="true"
                     android:text="@string/text"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:textSize="19sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -90,7 +91,7 @@
                     android:layout_gravity="center_vertical"
                     android:text="@string/price"
                     android:textColor="@color/light_brown"
-                    android:textSize="17sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -100,7 +101,7 @@
                     android:layout_marginStart="5dp"
                     android:text="@string/VNĐ"
                     android:textColor="@color/light_brown"
-                    android:textSize="17sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -114,11 +115,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/rating"
                     android:textColor="@color/white"
-                    android:textSize="17sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:layout_marginStart="5dp"
                     android:src="@drawable/star" />
 
@@ -151,29 +153,31 @@
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout_Detail"
                 android:layout_width="300dp"
-                android:background="@drawable/tab_background"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                app:tabSelectedTextColor="@color/light_brown"
-                app:tabIndicatorHeight="1dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/tab_background"
                 app:tabIndicatorColor="#00FFFFFF"
-                android:layout_marginTop="20dp" />
+                app:tabIndicatorHeight="1dp"
+                app:tabSelectedTextColor="@color/light_brown" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/view_pager2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/bt_add_to_cart"
-        android:text="Tiến hành đặt hàng"
-        android:textSize="17sp"
-        android:textColor="@color/white"
-        android:background="@drawable/button_custom2"
-        android:textAllCaps="false"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginTop="3dp"
+            android:id="@+id/bt_add_to_cart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/button_custom2"
+            android:text="Tiến hành đặt hàng"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
 
     </RelativeLayout>
 

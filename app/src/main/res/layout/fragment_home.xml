@@ -95,7 +95,7 @@
                         android:textColor="@color/white" />
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btLogin_SignUp_Home_Page"
+                        android:id="@+id/btMember"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_marginTop="20dp"

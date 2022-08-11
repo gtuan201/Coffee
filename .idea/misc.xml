@@ -24,6 +24,7 @@
         <entry key="..\:/Coffee/app/src/main/res/drawable/cirle_button.xml" value="0.2035" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/custom_edit_text3.xml" value="0.16" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/custom_edit_text5.xml" value="0.173" />
+        <entry key="..\:/Coffee/app/src/main/res/drawable/custom_process_bar.xml" value="0.173" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/custom_search_view.xml" value="0.16" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/custom_textview.xml" value="0.159" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/divider.xml" value="0.16" />
@@ -58,6 +59,7 @@
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_member.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_on_boarding.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_order_detail.xml" value="0.25416666666666665" />
+        <entry key="..\:/Coffee/app/src/main/res/layout/activity_photo.xml" value="0.20863616930312098" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_rate.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_rating.xml" value="0.264" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_register.xml" value="0.25416666666666665" />
@@ -71,6 +73,7 @@
         <entry key="..\:/Coffee/app/src/main/res/layout/button_custom5.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/confirm_delete_dialog.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/custom_spinner.xml" value="0.25416666666666665" />
+        <entry key="..\:/Coffee/app/src/main/res/layout/dialog_member.xml" value="0.264" />
         <entry key="..\:/Coffee/app/src/main/res/layout/fragment_cart.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/fragment_cloudfee.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/fragment_coffee.xml" value="0.25416666666666665" />
@@ -86,6 +89,7 @@
         <entry key="..\:/Coffee/app/src/main/res/layout/fragment_tea.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/fragment_write.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/information_order_fragment.xml" value="0.25416666666666665" />
+        <entry key="..\:/Coffee/app/src/main/res/layout/member_dialog.xml" value="0.20863616930312098" />
         <entry key="..\:/Coffee/app/src/main/res/layout/onboarding1_fragment.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/onboarding2_fragment.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/onboarding3_fragment.xml" value="0.25416666666666665" />
@@ -102,6 +106,7 @@
         <entry key="..\:/Coffee/app/src/main/res/layout/row_rev_home.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/row_rev_home2.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/row_rev_infor_order.xml" value="0.25416666666666665" />
+        <entry key="..\:/Coffee/app/src/main/res/layout/row_review.xml" value="0.264" />
         <entry key="..\:/Coffee/app/src/main/res/layout/row_search.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/row_shop.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/test.xml" value="0.25416666666666665" />

@@ -1,6 +1,9 @@
 package com.example.coffee.fragment;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,11 +13,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.models.SlideModel;
@@ -28,7 +35,10 @@ import com.example.coffee.adapter.CoffeeHomeAdapter;
 import com.example.coffee.adapter.CoffeeHomeAdapter2;
 import com.example.coffee.model.Coffee;
 import com.example.coffee.model.News;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,6 +49,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -50,7 +61,7 @@ public class HomeFragment extends Fragment {
 
     private CircleImageView avatar;
     private ImageButton btGotoMember;
-    private AppCompatButton btLoginRegister;
+    private AppCompatButton btMember;
     private ImageView btSetting;
     private RecyclerView rev_home,rev_home2;
     private CoffeeHomeAdapter adapter;
@@ -65,7 +76,7 @@ public class HomeFragment extends Fragment {
         avatar = view.findViewById(R.id.avatar_user);
         btSetting = view.findViewById(R.id.btSetting);
         btGotoMember = view.findViewById(R.id.btGoToInformationMembership);
-        btLoginRegister = view.findViewById(R.id.btLogin_SignUp_Home_Page);
+        btMember = view.findViewById(R.id.btMember);
         imageSlider = view.findViewById(R.id.slider_news);
         rev_home = view.findViewById(R.id.rev_home);
         rev_home2 = view.findViewById(R.id.rev_home2);
@@ -83,10 +94,10 @@ public class HomeFragment extends Fragment {
                 startActivity(new Intent(getActivity(), AdminActivity.class));
             }
         });
-        btLoginRegister.setOnClickListener(new View.OnClickListener() {
+        btMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), RegisterActivity.class));
+                openMemberDialog();
             }
         });
         // Hiển thị dữ liệu lên Recyclerview1
@@ -156,6 +167,48 @@ public class HomeFragment extends Fragment {
         //Hiển thị dữ liệu lên Slider
         addNewsSlider();
         return view;
+    }
+
+    private void openMemberDialog() {
+        final Dialog dialog = new Dialog(getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.member_dialog);
+        Window window = dialog.getWindow();
+        if (window==null) return;
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager.LayoutParams windowAttribute = window.getAttributes();
+        windowAttribute.gravity = Gravity.CENTER;
+        window.setAttributes(windowAttribute);
+        AppCompatButton btCancel = dialog.findViewById(R.id.btCancelMember);
+        AppCompatButton btConfirm = dialog.findViewById(R.id.btConfirmMember);
+        btCancel.setOnClickListener(v -> dialog.dismiss());
+        btConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User");
+                HashMap<String,Object> hashMap = new HashMap<>();
+                hashMap.put("isMember","Yes");
+                reference.child(user.getUid())
+                        .updateChildren(hashMap)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(getContext(),"Chúc mừng bạn đã là thành viên của Tuna Coffee Shop",Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getContext(),"Lỗi ! Vui lòng thử lại",Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                        });
+            }
+        });
+        dialog.show();
     }
 
 

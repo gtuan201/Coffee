@@ -41,11 +41,11 @@ public class DetailActivity extends AppCompatActivity {
     private ImageView imageViewDetail;
     private ImageView btBackDetail;
     private AppCompatButton btFavorite,btAdd;
-    private TextView coffeeName, coffeeCategory, coffeeRate, coffeePrice;
+    private TextView coffeeName, coffeeCategory, coffeeRate, coffeePrice,tvQuantity;
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
     private DetailViewPager2Adapter adapter;
-    String name,price,rate,category,background,img;
+    String name,price,rate,category,background,img,avg;
     int quantityInt,totalPriceInt,priceInt;
     String strQuantity,size = "Nhỏ",ice = "30%",note = "",totalPrice = "";
     String coffeeID = "";
@@ -61,12 +61,14 @@ public class DetailActivity extends AppCompatActivity {
         coffeeName = findViewById(R.id.tvCoffeeName);
         coffeeCategory = findViewById(R.id.tvCategory);
         coffeeRate = findViewById(R.id.tvRate);
+        tvQuantity = findViewById(R.id.tvQuantity);
         coffeePrice = findViewById(R.id.tvPrice);
         tabLayout = findViewById(R.id.tabLayout_Detail);
         viewPager2 = findViewById(R.id.view_pager2);
         Intent intent = getIntent();
         name = intent.getStringExtra("name");
         coffeeName.setText(name);
+        setRatingAverage();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Coffee");
         reference.child(name)
                .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -78,7 +80,6 @@ public class DetailActivity extends AppCompatActivity {
                        price = ""+snapshot.child("price").getValue();
                        background = ""+snapshot.child("background").getValue();
                        coffeeCategory.setText(category);
-                       coffeeRate.setText(rate);
                        coffeePrice.setText(price);
                        Glide.with(imageViewDetail).load(background).into(imageViewDetail);
                    }
@@ -409,6 +410,38 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
+
+    private void setRatingAverage() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Coffee");
+        reference.child(name).child("Review")
+                .addValueEventListener(new ValueEventListener() {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        long quantityReview = snapshot.getChildrenCount();
+                        float sum = 0;
+                        for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+                            String strRate = ""+dataSnapshot.child("rate").getValue();
+                            sum += Float.parseFloat(strRate);
+                        }
+                        if (sum ==0){
+                            coffeeRate.setText("0");
+                            tvQuantity.setText("Chưa có đánh giá");
+                        }
+                        else {
+                            float average = sum/quantityReview;
+                            avg = String.valueOf(average);
+                            coffeeRate.setText(String.format("%s/5", average));
+                            tvQuantity.setText(String.format("%s đánh giá", quantityReview));
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
     public String getName() {
         return name;
     }

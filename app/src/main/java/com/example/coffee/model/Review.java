@@ -1,17 +1,20 @@
 package com.example.coffee.model;
 
 public class Review {
-    String imgUser,userName,imgReview,review,rating;
+    String imgUser,userName,imgReview,review,rating,date,time;
 
-    public Review(String imgUser, String userName, String imgReview, String review, String rating) {
+
+    public Review() {
+    }
+
+    public Review(String imgUser, String userName, String imgReview, String review, String rating, String date, String time) {
         this.imgUser = imgUser;
         this.userName = userName;
         this.imgReview = imgReview;
         this.review = review;
         this.rating = rating;
-    }
-
-    public Review() {
+        this.date = date;
+        this.time = time;
     }
 
     public String getImgUser() {
@@ -52,5 +55,21 @@ public class Review {
 
     public void setRating(String rating) {
         this.rating = rating;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

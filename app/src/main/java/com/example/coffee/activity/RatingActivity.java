@@ -58,7 +58,7 @@ public class RatingActivity extends AppCompatActivity {
     private EditText stringRate;
     private AppCompatButton btAddImg,btBack,btReview;
     private CheckBox cb1,cb2,cb3,cb4,cb5;
-    private String strCb = "",uploadImgUrl,strReview,name,id;
+    private String strCb = "",uploadImgUrl,strReview,name,id,avg;
     private Uri imgUri;
     private float rate;
     private List<Cart> list;
@@ -159,10 +159,10 @@ public class RatingActivity extends AppCompatActivity {
                         hashMap.put("id",""+timestamp);
                         hashMap.put("uid",user.getUid());
                         hashMap.put("username",userName);
-                        hashMap.put("imgUser",""+imgUser);
+                        hashMap.put("imgUser",imgUser);
                         hashMap.put("rate",String.valueOf(rate));
-                        hashMap.put("review",""+strReview);
-                        hashMap.put("imgCoffeeReview",""+uploadImgUrl);
+                        hashMap.put("review",strReview);
+                        hashMap.put("imgCoffeeReview",uploadImgUrl);
                         hashMap.put("time",saveCurrentTime);
                         hashMap.put("date",saveCurrentDate);
                         reference.child(name).child("Review").child(""+timestamp)
@@ -191,6 +191,31 @@ public class RatingActivity extends AppCompatActivity {
                         map.put("status","Đã đánh giá");
                         databaseReference.child("customer").child(id).child("coffee").child(name)
                                 .updateChildren(map);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+        reference.child(name).child("Review")
+                .addValueEventListener(new ValueEventListener() {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        long quantityReview = snapshot.getChildrenCount();
+                        float sum = 0;
+                        for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+                            String strRate = ""+dataSnapshot.child("rate").getValue();
+                            sum += Float.parseFloat(strRate);
+                        }
+
+                        float average = sum/quantityReview;
+                        avg = String.valueOf(average);
+                        HashMap<String,Object> hashMap = new HashMap<>();
+                        hashMap.put("rate",avg);
+                        reference.child(name)
+                                .updateChildren(hashMap);
                     }
 
                     @Override

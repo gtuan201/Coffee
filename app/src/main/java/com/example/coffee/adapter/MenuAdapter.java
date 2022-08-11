@@ -44,7 +44,12 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         }
         holder.nameMenu.setText(coffee.getCoffeeName());
         holder.priceMenu.setText(coffee.getPrice());
-        holder.ratingMenu.setText(coffee.getRate());
+        if (coffee.getRate().equals("")){
+            holder.ratingMenu.setText("0");
+        }
+        else {
+            holder.ratingMenu.setText(coffee.getRate());
+        }
         Glide.with(holder.imgMenu).load(coffee.getUrlImg()).error(R.drawable.error_img).into(holder.imgMenu);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

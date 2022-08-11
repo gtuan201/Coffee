@@ -50,8 +50,10 @@ public class SearchActivity extends AppCompatActivity {
                     String description = ""+dataSnapshot.child("description").getValue();
                     String price = ""+dataSnapshot.child("price").getValue();
                     String category = ""+dataSnapshot.child("category").getValue();
+                    String rate = ""+dataSnapshot.child("rate").getValue();
                     Coffee coffee = new Coffee();
                     coffee.setUrlImg(imgUrl);
+                    coffee.setRate(rate);
                     coffee.setCoffeeName(name);
                     coffee.setCoffeeDescription(description);
                     coffee.setPrice(price);

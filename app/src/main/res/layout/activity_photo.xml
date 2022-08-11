@@ -5,24 +5,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#272727">
+    tools:context=".activity.PhotoActivity">
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btBackThanks"
+        android:id="@+id/btBackPhoto"
         android:background="@drawable/ic_baseline_clear_24"
         android:layout_margin="10dp"
         android:layout_width="32dp"
         android:layout_height="32dp"/>
     <ImageView
-        android:src="@drawable/thankyou"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"/>
-    <TextView
-        android:text="@string/thanks"
-        android:textStyle="bold|italic"
-        android:layout_marginHorizontal="40dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textColor="#5A9E70"
+        android:id="@+id/bigImgReview"
+        android:layout_gravity="center|center_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
 </LinearLayout>

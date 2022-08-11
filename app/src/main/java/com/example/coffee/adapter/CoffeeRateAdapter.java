@@ -54,32 +54,35 @@ public class CoffeeRateAdapter extends RecyclerView.Adapter<CoffeeRateAdapter.Co
         holder.ice.setText(String.format("Phần trăm đá: %s", cart.getIceCart()));
         holder.quantity.setText(String.format("Số lượng: %s", cart.getQuantityCart()));
         holder.totalPrice.setText(String.format("Thành tiền: %s VNĐ", cart.getTotalPriceCart()));
-        holder.btRating.setOnClickListener(v -> {
-            Intent intent = new Intent(context, RatingActivity.class);
-            intent.putExtra("id",cart.getCoffeeID());
-            intent.putExtra("imgUrl",cart.getImgCart());
-            intent.putExtra("name",cart.getNameCart());
-            intent.putExtra("size",cart.getSizeCart());
-            intent.putExtra("ice",cart.getIceCart());
-            intent.putExtra("quantity",cart.getQuantityCart());
-            context.startActivities(new Intent[]{intent});
-        });
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Coffee");
-        Query query =  reference.child(cart.getNameCart()).child("Review").orderByChild("status").equalTo("Đã đánh giá");
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                boolean isReview = snapshot.exists();
-                if (isReview){
-                    holder.btRating.setText("Đã đánh giá");
-                }
-            }
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Bill");
+        reference.child("customer").child(cart.getCoffeeID()).child("coffee").child(cart.getNameCart())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String status = ""+snapshot.child("status").getValue();
+                        if (status.equals("Chưa đánh giá")){
+                            holder.btRating.setOnClickListener(v -> {
+                                Intent intent = new Intent(context, RatingActivity.class);
+                                intent.putExtra("id",cart.getCoffeeID());
+                                intent.putExtra("imgUrl",cart.getImgCart());
+                                intent.putExtra("name",cart.getNameCart());
+                                intent.putExtra("size",cart.getSizeCart());
+                                intent.putExtra("ice",cart.getIceCart());
+                                intent.putExtra("quantity",cart.getQuantityCart());
+                                context.startActivities(new Intent[]{intent});
+                            });
+                        }
+                        else if (status.equals("Đã đánh giá")){
+                            holder.btRating.setBackgroundResource(R.drawable.button_custom6);
+                        }
+                    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                    }
+                });
+
     }
 
     @Override

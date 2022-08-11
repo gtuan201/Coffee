@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="15sp"
+    android:layout_marginHorizontal="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <TextView
+            android:text="@string/titlemember"
+            android:paddingVertical="10dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="17.5sp"
+            android:background="#FA774E"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:textColor="@color/dark_grey"
+            android:layout_marginStart="10dp"
+            android:text="Chỉ với 70,000 VNĐ / tháng, bạn có thể có nhưng ưu đãi khi trở thành thành viên như sau :"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:textColor="@color/dark_grey"
+            android:textSize="14sp"
+            android:layout_marginStart="15sp"
+            android:layout_marginEnd="5dp"
+            android:text="+ Thành viên Bạc: sẽ được free 1 thức uống tại quán mỗi tuần"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:textColor="@color/dark_grey"
+            android:textSize="14sp"
+            android:layout_marginStart="15sp"
+            android:text="+ Thành viên Vàng: sẽ được free 2 thức uống tại quán mỗi tuần"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:textColor="@color/dark_grey"
+            android:textSize="14sp"
+            android:layout_marginStart="15sp"
+            android:text="+ Thành viên Kim Cương: sẽ được free 3 thức uống tại quán mỗi tuần"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:text="Bạn có muốn đăng ký không ?"
+            android:textStyle="bold"
+            android:paddingHorizontal="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginVertical="10dp"
+            android:paddingHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btCancelMember"
+                android:textSize="15sp"
+                android:background="@drawable/button_custom6"
+                android:textColor="@color/white"
+                android:text="Hủy"
+                android:textAllCaps="false"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btConfirmMember"
+                android:background="@drawable/button_custom5"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:layout_marginStart="20dp"
+                android:textAllCaps="false"
+                android:text="Đăng ký"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
