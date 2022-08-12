@@ -14,6 +14,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -32,6 +33,7 @@ import com.example.coffee.OnItemClickListener;
 import com.example.coffee.R;
 import com.example.coffee.activity.MainActivity;
 import com.example.coffee.adapter.CartAdapter;
+import com.example.coffee.model.Address;
 import com.example.coffee.model.Cart;
 import com.example.coffee.model.Coffee;
 import com.example.coffee.model.Order;
@@ -190,6 +192,30 @@ public class CartFragment extends Fragment{
                 }
             }
         });
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        reference.child(user.getUid()).child("Address")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+                            String isDefault = ""+dataSnapshot.child("isDefault").getValue();
+                            if (isDefault.equals("Yes")){
+                                String nameAddress = ""+dataSnapshot.child("nameAddress").getValue();
+                                String phone  = ""+dataSnapshot.child("phone").getValue();
+                                String address = ""+dataSnapshot.child("address").getValue();
+                                namePayment.setText(nameAddress);
+                                phoneNumberPayment.setText(phone);
+                                addressPayment.setText(address);
+                            }
+                        };
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
         tvSelectedShop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -256,10 +282,31 @@ public class CartFragment extends Fragment{
                     else if (TextUtils.isEmpty(shopName)){
                         Toast.makeText(getContext(),"Vui lòng chọn cửa hàng đến lấy !",Toast.LENGTH_SHORT).show();
                     }
-                    else putOrderDataToDataBase();
+                    else {
+                        putOrderDataToDataBase();
+                        deleteAllCart();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                bottomSheetDialog.dismiss();
+                            }
+                        },1000);
+                    }
                 }
             }
         });
+    }
+
+    private void deleteAllCart() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Order");
+        reference.child(user.getUid()).child("Cart")
+                .removeValue()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                    }
+                });
     }
 
     private void putOrderDataToDataBase() {

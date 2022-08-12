@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.DefaultAddressActivity"
+    android:background="#101010">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/layout_title"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="10dp">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btBackAddressDefault"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_baseline_arrow_back_ios_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Địa chỉ của tôi"
+                android:textColor="@color/white"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <TextView
+            android:text="Địa chỉ"
+            android:textSize="15sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:textColor="@color/grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rev_address"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/addNewAddress"
+        android:text="Thêm địa chỉ mới"
+        android:textSize="15sp"
+        android:textColor="@color/light_brown"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:drawablePadding="7dp"
+        app:drawableStartCompat="@drawable/ic_baseline_add_circle_outline_24" />
+</RelativeLayout>

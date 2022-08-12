@@ -322,11 +322,9 @@ public class DetailActivity extends AppCompatActivity {
                             int finalTotalPriceInCart = totalPriceInCart + totalPriceInt;
                             totalPrice = String.valueOf(finalTotalPriceInCart);
                             updateCart();
-                            Toast.makeText(DetailActivity.this,"Update",Toast.LENGTH_SHORT).show();
                         }
                         else {
                             addToCart();
-                            Toast.makeText(DetailActivity.this,"Add",Toast.LENGTH_SHORT).show();
                         }
                     }
 

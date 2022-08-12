@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="15dp"
+    android:layout_marginHorizontal="10dp">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey">
+        <TextView
+            android:text="Thêm địa chỉ mới"
+            android:background="@color/dark_grey"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:gravity="center_horizontal|center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"/>
+        <EditText
+            android:id="@+id/newName"
+            android:inputType="textPersonName"
+            android:hint="Họ và tên"
+            android:textColorHint="@color/dark_grey"
+            android:textColor="@color/black"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/custom_edit_text3"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"/>
+        <EditText
+            android:id="@+id/newPhone"
+            android:inputType="phone"
+            android:hint="Số điện thoại"
+            android:textColorHint="@color/dark_grey"
+            android:textColor="@color/black"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/custom_edit_text3"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"/>
+        <EditText
+            android:id="@+id/newAddress"
+            android:hint="Địa chỉ"
+            android:inputType="textPersonName"
+            android:textColorHint="@color/dark_grey"
+            android:textColor="@color/black"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/custom_edit_text3"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btAddAddress"
+            android:text="Thêm"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:background="@drawable/button_custom5"
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginVertical="10dp"
+            android:layout_width="200dp"
+            android:layout_height="40dp"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

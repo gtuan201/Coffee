@@ -59,11 +59,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeFragment extends Fragment {
 
-
-    private CircleImageView avatar;
-    private ImageButton btGotoMember;
     private AppCompatButton btMember;
-    private ImageView btSetting;
     private TextView levelMember;
     private RecyclerView rev_home,rev_home2;
     private CoffeeHomeAdapter adapter;
@@ -76,25 +72,11 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        avatar = view.findViewById(R.id.avatar_user);
-        btSetting = view.findViewById(R.id.btSetting);
-        btGotoMember = view.findViewById(R.id.btGoToInformationMembership);
         btMember = view.findViewById(R.id.btMember);
         levelMember = view.findViewById(R.id.tvLevelMember);
         imageSlider = view.findViewById(R.id.slider_news);
         rev_home = view.findViewById(R.id.rev_home);
         rev_home2 = view.findViewById(R.id.rev_home2);
-        btGotoMember.setOnClickListener(v -> {
-            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-            firebaseAuth.signOut();
-            startActivity(new Intent(getActivity(), LoginActivity.class));
-        });
-        btSetting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), AdminActivity.class));
-            }
-        });
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         ref.child(user.getUid())
