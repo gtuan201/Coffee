@@ -21,6 +21,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.denzcoskun.imageslider.ImageSlider;
@@ -63,11 +64,13 @@ public class HomeFragment extends Fragment {
     private ImageButton btGotoMember;
     private AppCompatButton btMember;
     private ImageView btSetting;
+    private TextView levelMember;
     private RecyclerView rev_home,rev_home2;
     private CoffeeHomeAdapter adapter;
     private CoffeeHomeAdapter2 adapter2;
     private ImageSlider imageSlider;
     List<Coffee> coffeeList, coffeeList2;
+    String strIsMember ="";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -77,16 +80,14 @@ public class HomeFragment extends Fragment {
         btSetting = view.findViewById(R.id.btSetting);
         btGotoMember = view.findViewById(R.id.btGoToInformationMembership);
         btMember = view.findViewById(R.id.btMember);
+        levelMember = view.findViewById(R.id.tvLevelMember);
         imageSlider = view.findViewById(R.id.slider_news);
         rev_home = view.findViewById(R.id.rev_home);
         rev_home2 = view.findViewById(R.id.rev_home2);
-        btGotoMember.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-                firebaseAuth.signOut();
-                startActivity(new Intent(getActivity(), LoginActivity.class));
-            }
+        btGotoMember.setOnClickListener(v -> {
+            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+            firebaseAuth.signOut();
+            startActivity(new Intent(getActivity(), LoginActivity.class));
         });
         btSetting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,12 +95,32 @@ public class HomeFragment extends Fragment {
                 startActivity(new Intent(getActivity(), AdminActivity.class));
             }
         });
-        btMember.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openMemberDialog();
-            }
-        });
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        ref.child(user.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String strLevel = ""+snapshot.child("LevelMember").getValue();
+                        String strPointMember = ""+snapshot.child("PointMember").getValue();
+                        strIsMember = ""+snapshot.child("isMember").getValue();
+                        if (strIsMember.equals("Yes")){
+                            levelMember.setText(String.format("Hạng thành viên của bạn là : %s Member", strLevel));
+                            btMember.setText(String.format("Điểm thành viên: %s", strPointMember));
+                        }
+                        if (!strIsMember.equals("Yes")) {
+                            btMember.setOnClickListener(v -> {
+                                openMemberDialog();
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
         // Hiển thị dữ liệu lên Recyclerview1
         coffeeList = new ArrayList<>();
         LinearLayoutManager manager = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
@@ -169,6 +190,30 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    private void isCheckMember() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        ref.child(user.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String strLevel = ""+snapshot.child("LevelMember").getValue();
+                        String strPointMember = ""+snapshot.child("PointMember").getValue();
+                        strIsMember = ""+snapshot.child("isMember").getValue();
+                        if (strIsMember.equals("Yes")){
+                            levelMember.setText(String.format("Hạng thành viên của bạn là : %s Member", strLevel));
+                            btMember.setText(String.format("Điểm thành viên: %s", strPointMember));
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+    }
+
     private void openMemberDialog() {
         final Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -190,11 +235,14 @@ public class HomeFragment extends Fragment {
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User");
                 HashMap<String,Object> hashMap = new HashMap<>();
                 hashMap.put("isMember","Yes");
+                hashMap.put("LevelMember","Đồng");
+                hashMap.put("PointMember","0");
                 reference.child(user.getUid())
                         .updateChildren(hashMap)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
+                                isCheckMember();
                                 Toast.makeText(getContext(),"Chúc mừng bạn đã là thành viên của Tuna Coffee Shop",Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
                             }
