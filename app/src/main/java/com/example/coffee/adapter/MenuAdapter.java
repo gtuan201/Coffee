@@ -44,7 +44,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         }
         holder.nameMenu.setText(coffee.getCoffeeName());
         holder.priceMenu.setText(coffee.getPrice());
-        if (coffee.getRate().equals("")){
+        if (coffee.getRate().equals("0.0") || coffee.getRate().equals("")){
             holder.ratingMenu.setText("0");
         }
         else {

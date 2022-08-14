@@ -413,7 +413,7 @@ public class DetailActivity extends AppCompatActivity {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Coffee");
         reference.child(name).child("Review")
                 .addValueEventListener(new ValueEventListener() {
-                    @SuppressLint("SetTextI18n")
+                    @SuppressLint({"SetTextI18n", "DefaultLocale"})
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         long quantityReview = snapshot.getChildrenCount();
@@ -428,8 +428,8 @@ public class DetailActivity extends AppCompatActivity {
                         }
                         else {
                             float average = sum/quantityReview;
-                            avg = String.valueOf(average);
-                            coffeeRate.setText(String.format("%s/5", average));
+                            avg = String.format("%.1f",average);
+                            coffeeRate.setText(String.format("%s/5", avg));
                             tvQuantity.setText(String.format("%s đánh giá", quantityReview));
                         }
                     }

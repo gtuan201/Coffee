@@ -10,11 +10,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Handler;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -33,10 +31,7 @@ import com.example.coffee.OnItemClickListener;
 import com.example.coffee.R;
 import com.example.coffee.activity.MainActivity;
 import com.example.coffee.adapter.CartAdapter;
-import com.example.coffee.model.Address;
 import com.example.coffee.model.Cart;
-import com.example.coffee.model.Coffee;
-import com.example.coffee.model.Order;
 import com.example.coffee.model.Shop;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -47,7 +42,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
@@ -270,7 +264,7 @@ public class CartFragment extends Fragment{
                     else if (TextUtils.isEmpty(strAddress)){
                         Toast.makeText(getContext(),"Vui lòng nhập địa chỉ giao hàng !",Toast.LENGTH_SHORT).show();
                     }
-                    else putOrderDataToDataBase();
+                    else putOrderDataToDataBase(bottomSheetDialog);
                 }
                 else if (purchase_method.equals("pick up")) {
                     if (TextUtils.isEmpty(strNamePay)){
@@ -283,14 +277,8 @@ public class CartFragment extends Fragment{
                         Toast.makeText(getContext(),"Vui lòng chọn cửa hàng đến lấy !",Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        putOrderDataToDataBase();
+                        putOrderDataToDataBase(bottomSheetDialog);
                         deleteAllCart();
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                bottomSheetDialog.dismiss();
-                            }
-                        },1000);
                     }
                 }
             }
@@ -309,7 +297,7 @@ public class CartFragment extends Fragment{
                 });
     }
 
-    private void putOrderDataToDataBase() {
+    private void putOrderDataToDataBase(BottomSheetDialog bottomSheetDialog) {
         HashMap<String, Object> hashMap = new HashMap<>();
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
@@ -339,12 +327,16 @@ public class CartFragment extends Fragment{
                     @Override
                     public void onSuccess(Void unused) {
                         Toast.makeText(getContext(),"Đặt hàng thành công !",Toast.LENGTH_SHORT).show();
+                        bottomSheetDialog.cancel();
+                        deleteAllCart();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(getContext(),"Đặt hàng không thành công !",Toast.LENGTH_SHORT).show();
+                        bottomSheetDialog.cancel();
+                        deleteAllCart();
                     }
                 });
         DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("Order");

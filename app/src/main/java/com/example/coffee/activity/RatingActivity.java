@@ -200,7 +200,7 @@ public class RatingActivity extends AppCompatActivity {
                 });
         reference.child(name).child("Review")
                 .addValueEventListener(new ValueEventListener() {
-                    @SuppressLint("SetTextI18n")
+                    @SuppressLint({"SetTextI18n", "DefaultLocale"})
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         long quantityReview = snapshot.getChildrenCount();
@@ -211,7 +211,7 @@ public class RatingActivity extends AppCompatActivity {
                         }
 
                         float average = sum/quantityReview;
-                        avg = String.valueOf(average);
+                        avg = String.format("%.1f",average);
                         HashMap<String,Object> hashMap = new HashMap<>();
                         hashMap.put("rate",avg);
                         reference.child(name)
