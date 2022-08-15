@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.ReportActivity"
+    android:background="#1B1A1A">
+    <LinearLayout
+        android:layout_above="@id/btSendReport"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#171717"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="7dp">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btBackReport"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/ic_baseline_arrow_back_ios_24" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/report_review"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <TextView
+            android:text="Vui lòng chọn lý do báo cáo"
+            android:paddingStart="10dp"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center_vertical"/>
+        <View
+            android:background="#B0686868"
+            android:layout_width="match_parent"
+            android:layout_height="2.5dp"/>
+
+        <RadioGroup
+            android:id="@+id/groupReport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rb1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Đánh giá thô tục phản cảm"
+                android:textColor="@color/white" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/dark_grey" />
+
+            <RadioButton
+                android:id="@+id/rb2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chứa hình ảnh phản cảm, khỏa thân, khiêu dâm"
+                android:textColor="@color/white" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/dark_grey" />
+
+            <RadioButton
+                android:id="@+id/rb3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Đánh giá trùng lặp (thông tin rác)"
+                android:textColor="@color/white" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/dark_grey" />
+
+            <RadioButton
+                android:id="@+id/rb4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chứa thông tin cá nhân"
+                android:textColor="@color/white" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/dark_grey" />
+
+            <RadioButton
+                android:id="@+id/rb5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Quảng cáo trái phép"
+                android:textColor="@color/white" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/dark_grey" />
+
+            <RadioButton
+                android:id="@+id/rb6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Đánh giá không chính xác / gây hiểu lầm (ví dụ như : đánh giá và sản phẩm không khớp,..."
+                android:textColor="@color/white" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/dark_grey" />
+            <RadioButton
+                android:id="@+id/rb7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Vi phạm khác"
+                android:textColor="@color/white" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/tvRb7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:background="@drawable/button_custom9"
+            android:hint="Vui lòng mô tả chi tiết vi phạm (bắt buộc)"
+            android:layout_marginBottom="5dp"
+            android:padding="10dp"
+            android:textColor="@color/grey"
+            android:textColorHint="@color/dark_grey"
+            android:textSize="14sp"
+            android:visibility="gone" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/dark_grey" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btSendReport"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="8dp"
+        android:background="@drawable/button_custom6"
+        android:text="Gửi"
+        android:textColor="@color/dark_grey"
+        android:textSize="15sp" />
+</RelativeLayout>

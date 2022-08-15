@@ -163,6 +163,7 @@ public class RatingActivity extends AppCompatActivity {
                         hashMap.put("rate",String.valueOf(rate));
                         hashMap.put("review",strReview);
                         hashMap.put("imgCoffeeReview",uploadImgUrl);
+                        hashMap.put("coffeeReview",name);
                         hashMap.put("time",saveCurrentTime);
                         hashMap.put("date",saveCurrentDate);
                         reference.child(name).child("Review").child(""+timestamp)

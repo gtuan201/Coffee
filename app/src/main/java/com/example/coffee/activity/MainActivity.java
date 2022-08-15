@@ -2,6 +2,7 @@ package com.example.coffee.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         BottomNavigationView nav = findViewById(R.id.nav_home);
         nav.setSelectedItemId(R.id.icon_home);
-        getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment,new HomeFragment()).addToBackStack("Home").commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment,new HomeFragment()).commit();
         nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @SuppressLint("NonConstantResourceId")
             @Override

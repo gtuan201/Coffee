@@ -13,7 +13,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.coffee.BuildConfig;
 import com.example.coffee.R;
+import com.example.coffee.activity.ContactActivity;
 import com.example.coffee.activity.DefaultAddressActivity;
 import com.example.coffee.activity.InformationActivity;
 import com.example.coffee.activity.LoginActivity;
@@ -33,13 +35,17 @@ public class NotificationFragment extends Fragment {
         TextView address = view.findViewById(R.id.address_user);
         TextView deleteAccount = view.findViewById(R.id.delete_account);
         TextView logOut = view.findViewById(R.id.log_out);
+        TextView version  = view.findViewById(R.id.version);
+        TextView contact = view.findViewById(R.id.contact);
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        infor.setOnClickListener(new View.OnClickListener() {
+        version.setOnClickListener(v -> Toast.makeText(getContext(), "Version "+ BuildConfig.VERSION_NAME,Toast.LENGTH_SHORT).show());
+        contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), InformationActivity.class));
+                startActivity(new Intent(getActivity(), ContactActivity.class));
             }
         });
+        infor.setOnClickListener(v -> startActivity(new Intent(getActivity(), InformationActivity.class)));
         deleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,26 +67,21 @@ public class NotificationFragment extends Fragment {
                         .show();
             }
         });
-        logOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new AlertDialog.Builder(getContext())
-                        .setTitle("Bạn có muốn đăng xuất không?")
-                        .setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                logOutUser(firebaseAuth);
-                                dialog.cancel();
-                            }
-                        })
-                        .setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        }).show();
-            }
-        });
+        logOut.setOnClickListener(v -> new AlertDialog.Builder(getContext())
+                .setTitle("Bạn có muốn đăng xuất không?")
+                .setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        logOutUser(firebaseAuth);
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                }).show());
         address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

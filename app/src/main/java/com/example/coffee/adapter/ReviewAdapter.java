@@ -2,6 +2,7 @@ package com.example.coffee.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +10,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatRatingBar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.coffee.R;
 import com.example.coffee.activity.PhotoActivity;
+import com.example.coffee.activity.ReportActivity;
 import com.example.coffee.model.Review;
 
 import java.util.List;
@@ -25,7 +28,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>{
 
     private final List<Review> reviewList;
-    private Context context;
+    private final Context context;
 
     public ReviewAdapter(List<Review> reviewList, Context context) {
         this.reviewList = reviewList;
@@ -59,12 +62,44 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
         holder.ratingBar.setRating(rate);
         Glide.with(holder.imgReview).load(review.getImgReview()).into(holder.imgReview);
         holder.dateTime.setText(String.format("%s %s", review.getDate(), review.getTime()));
-        holder.imgReview.setOnClickListener(new View.OnClickListener() {
+        holder.imgReview.setOnClickListener(v -> {
+            Intent intent = new Intent(context, PhotoActivity.class);
+            intent.putExtra("url",review.getImgReview());
+            context.startActivities(new Intent[]{intent});
+        });
+        holder.btReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, PhotoActivity.class);
-                intent.putExtra("url",review.getImgReview());
+                holder.tvReport.setVisibility(View.VISIBLE);
+                holder.btReport.setVisibility(View.GONE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        holder.tvReport.setVisibility(View.GONE);
+                        holder.btReport.setVisibility(View.VISIBLE);
+                    }
+                },2000);
+            }
+        });
+        holder.tvReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ReportActivity.class);
+                intent.putExtra("id",review.getId());
+                intent.putExtra("username",review.getUserName());
+                intent.putExtra("coffeeReview",review.getCoffeeName());
+                intent.putExtra("imgReview",review.getImgReview());
+                intent.putExtra("review",review.getReview());
+                intent.putExtra("rate",review.getRating());
+                intent.putExtra("date",review.getDate());
                 context.startActivities(new Intent[]{intent});
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.tvReport.setVisibility(View.GONE);
+                holder.btReport.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -79,8 +114,9 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
 
     public static class ReviewViewHolder extends RecyclerView.ViewHolder {
         CircleImageView imgUser;
-        TextView nameUser,tv_review,dateTime;
+        TextView nameUser,tv_review,dateTime,tvReport;
         AppCompatRatingBar ratingBar;
+        AppCompatButton btReport;
         ImageView imgReview;
         public ReviewViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -90,6 +126,8 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
             ratingBar = itemView.findViewById(R.id.rateReview);
             imgReview = itemView.findViewById(R.id.img_review);
             dateTime = itemView.findViewById(R.id.dateTime);
+            btReport = itemView.findViewById(R.id.btReportReview);
+            tvReport = itemView.findViewById(R.id.tvReport);
         }
     }
 }

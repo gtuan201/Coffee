@@ -55,4 +55,8 @@
     <string name="thanks">Cảm ơn bạn đã đánh giá sản phẩm của chúng tôi</string>
     <string name="titlemember">Nội dung chương trình</string>
     <string name="account">Tài khoản</string>
+    <string name="report_review">Báo cáo đánh giá này</string>
+    <string name="facebook"><a href="https://www.facebook.com/tuan.nguyxn">Facebook cá nhân : Nguyễn Giản Tuấn</a></string>
+    <string name="instagram"><a href="https://www.instagram.com/_imfox_/">Instagram : _imfox_</a></string>
+    <string name="github"><a href="https://github.com/gtuan201">Github :gtuan201</a></string>
 </resources>

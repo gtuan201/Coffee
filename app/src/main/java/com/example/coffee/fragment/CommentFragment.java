@@ -28,7 +28,7 @@ public class CommentFragment extends Fragment {
     private RecyclerView revReview;
     private List<Review> list;
     private ReviewAdapter adapter;
-    String imgUser,nameUser,strRate,imgReview,strReview,date,time,strQuantityReview;
+    String imgUser,nameUser,strRate,imgReview,strReview,date,time,coffeeReview,idReview;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,6 +49,7 @@ public class CommentFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         list.clear();
                         for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+                            idReview = ""+dataSnapshot.child("id").getValue();
                             imgUser = ""+dataSnapshot.child("imgUser").getValue();
                             nameUser = ""+dataSnapshot.child("username").getValue();
                             strRate = ""+dataSnapshot.child("rate").getValue();
@@ -56,12 +57,15 @@ public class CommentFragment extends Fragment {
                             imgReview = ""+dataSnapshot.child("imgCoffeeReview").getValue();
                             time = ""+dataSnapshot.child("time").getValue();
                             date = ""+dataSnapshot.child("date").getValue();
+                            coffeeReview = ""+dataSnapshot.child("coffeeReview").getValue();
                             Review review = new Review();
+                            review.setId(idReview);
                             review.setImgUser(imgUser);
                             review.setUserName(nameUser);
                             review.setRating(strRate);
                             review.setImgReview(imgReview);
                             review.setReview(strReview);
+                            review.setCoffeeName(coffeeReview);
                             review.setDate(date);
                             review.setTime(time);
                             list.add(review);

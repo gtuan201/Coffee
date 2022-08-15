@@ -25,6 +25,7 @@
         <entry key="..\:/Coffee/app/src/main/res/drawable/custom_edit_text3.xml" value="0.16" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/custom_edit_text5.xml" value="0.173" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/custom_process_bar.xml" value="0.173" />
+        <entry key="..\:/Coffee/app/src/main/res/drawable/custom_radio_button.xml" value="0.16" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/custom_search_view.xml" value="0.16" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/custom_textview.xml" value="0.159" />
         <entry key="..\:/Coffee/app/src/main/res/drawable/custom_tv.xml" value="0.173" />
@@ -58,6 +59,7 @@
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_change_password.xml" value="0.20863616930312098" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_complete.xml" value="0.20863616930312098" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_complete_rating.xml" value="0.20863616930312098" />
+        <entry key="..\:/Coffee/app/src/main/res/layout/activity_contact.xml" value="0.264" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_defaul_address.xml" value="0.20863616930312098" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_detail.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_favourite.xml" value="0.25416666666666665" />
@@ -71,6 +73,7 @@
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_rate.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_rating.xml" value="0.264" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_register.xml" value="0.25416666666666665" />
+        <entry key="..\:/Coffee/app/src/main/res/layout/activity_report.xml" value="0.264" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_search.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_splash.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/bagde.xml" value="0.25416666666666665" />
