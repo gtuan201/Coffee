@@ -60,7 +60,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class HomeFragment extends Fragment {
 
     private AppCompatButton btMember;
-    private TextView levelMember;
+    private TextView levelMember,tvMore;
     private RecyclerView rev_home,rev_home2;
     private CoffeeHomeAdapter adapter;
     private CoffeeHomeAdapter2 adapter2;
@@ -75,6 +75,7 @@ public class HomeFragment extends Fragment {
         btMember = view.findViewById(R.id.btMember);
         levelMember = view.findViewById(R.id.tvLevelMember);
         imageSlider = view.findViewById(R.id.slider_news);
+        tvMore = view.findViewById(R.id.tv_more);
         rev_home = view.findViewById(R.id.rev_home);
         rev_home2 = view.findViewById(R.id.rev_home2);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
@@ -119,14 +120,22 @@ public class HomeFragment extends Fragment {
                     String category = "" + dataSnapshot.child("category").getValue();
                     String price = "" + dataSnapshot.child("price").getValue();
                     String id = "" + dataSnapshot.child("id").getValue();
+                    String rate = ""+dataSnapshot.child("rate").getValue();
                     Coffee coffee = new Coffee();
-                    coffee.setId(id);
-                    coffee.setUrlImg(imgUrlCoffee);
-                    coffee.setCoffeeName(coffeeName);
-                    coffee.setCoffeeDescription(description);
-                    coffee.setCategory(category);
-                    coffee.setPrice(price);
-                    coffeeList.add(coffee);
+                    float rating;
+                    if (rate.equals("")) rating = 0;
+                    else {
+                        rating = Float.parseFloat(rate);
+                    }
+                    if (rating >= 4){
+                        coffee.setId(id);
+                        coffee.setUrlImg(imgUrlCoffee);
+                        coffee.setCoffeeName(coffeeName);
+                        coffee.setCoffeeDescription(description);
+                        coffee.setCategory(category);
+                        coffee.setPrice(price);
+                        coffeeList.add(coffee);
+                    }
                 }
                 adapter = new CoffeeHomeAdapter(coffeeList,getContext());
                 rev_home.setAdapter(adapter);
@@ -145,7 +154,7 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager manager2 = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
         rev_home2.setLayoutManager(manager2);
         DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("Coffee");
-        Query query = reference2.orderByChild("category").equalTo("Trà");
+        Query query = reference2.limitToLast(6);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

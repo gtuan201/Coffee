@@ -58,7 +58,7 @@ public class RatingActivity extends AppCompatActivity {
     private EditText stringRate;
     private AppCompatButton btAddImg,btBack,btReview;
     private CheckBox cb1,cb2,cb3,cb4,cb5;
-    private String strCb = "",uploadImgUrl,strReview,name,id,avg;
+    private String strCb = "",uploadImgUrl,strReview,name,id;
     private Uri imgUri;
     private float rate;
     private List<Cart> list;
@@ -212,9 +212,8 @@ public class RatingActivity extends AppCompatActivity {
                         }
 
                         float average = sum/quantityReview;
-                        avg = String.format("%.1f",average);
                         HashMap<String,Object> hashMap = new HashMap<>();
-                        hashMap.put("rate",avg);
+                        hashMap.put("rate",Math.round(average*100.0)/100.0);
                         reference.child(name)
                                 .updateChildren(hashMap);
                     }
