@@ -1,16 +1,25 @@
 package com.example.coffee.model;
 
 public class Address {
-    String nameAddress,phoneAddress,address,isDefault;
+    String id,nameAddress,phoneAddress,address,isDefault;
 
     public Address() {
     }
 
-    public Address(String nameAddress, String phoneAddress, String address, String isDefault) {
+    public Address(String id, String nameAddress, String phoneAddress, String address, String isDefault) {
+        this.id = id;
         this.nameAddress = nameAddress;
         this.phoneAddress = phoneAddress;
         this.address = address;
         this.isDefault = isDefault;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNameAddress() {

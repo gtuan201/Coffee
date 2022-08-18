@@ -66,7 +66,9 @@ public class DefaultAddressActivity extends AppCompatActivity {
                             String phone = ""+dataSnapshot.child("phone").getValue();
                             String strAddress = ""+dataSnapshot.child("address").getValue();
                             String isDefault = ""+dataSnapshot.child("isDefault").getValue();
+                            String id = ""+dataSnapshot.child("id").getValue();
                             Address address = new Address();
+                            address.setId(id);
                             address.setNameAddress(name);
                             address.setAddress(strAddress);
                             address.setPhoneAddress(phone);
