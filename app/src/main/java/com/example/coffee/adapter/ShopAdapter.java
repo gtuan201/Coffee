@@ -24,8 +24,8 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
 
 
     public List<Shop> shopList,shopFilterList;
-    private Context context;
-    private OnItemClickListener listener;
+    private final Context context;
+    private final OnItemClickListener listener;
     private FilterShop filterShop;
 
     public ShopAdapter(List<Shop> shopList, List<Shop> shopFilterList, Context context, OnItemClickListener listener) {

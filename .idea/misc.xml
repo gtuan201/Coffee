@@ -64,7 +64,7 @@
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_detail.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_favourite.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_information.xml" value="0.264" />
-        <entry key="..\:/Coffee/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
+        <entry key="..\:/Coffee/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_member.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_on_boarding.xml" value="0.25416666666666665" />
@@ -76,6 +76,7 @@
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_report.xml" value="0.264" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_search.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/activity_splash.xml" value="0.25416666666666665" />
+        <entry key="..\:/Coffee/app/src/main/res/layout/activity_test.xml" value="0.20863616930312098" />
         <entry key="..\:/Coffee/app/src/main/res/layout/bagde.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/bottom_sheet_add_to_cart.xml" value="0.264" />
         <entry key="..\:/Coffee/app/src/main/res/layout/bottom_sheet_list_shop.xml" value="0.25416666666666665" />
@@ -85,6 +86,7 @@
         <entry key="..\:/Coffee/app/src/main/res/layout/confirm_delete_dialog.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/custom_spinner.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/dialog_add_address.xml" value="0.20863616930312098" />
+        <entry key="..\:/Coffee/app/src/main/res/layout/dialog_cancel_order.xml" value="0.20863616930312098" />
         <entry key="..\:/Coffee/app/src/main/res/layout/dialog_member.xml" value="0.264" />
         <entry key="..\:/Coffee/app/src/main/res/layout/fragment_cart.xml" value="0.25416666666666665" />
         <entry key="..\:/Coffee/app/src/main/res/layout/fragment_cloudfee.xml" value="0.25416666666666665" />

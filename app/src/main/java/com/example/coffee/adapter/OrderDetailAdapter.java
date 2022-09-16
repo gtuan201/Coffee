@@ -22,7 +22,7 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
 
 
     private final List<Cart> list;
-    private Context context;
+    private final Context context;
     public OrderDetailAdapter(List<Cart> list, Context context) {
         this.list = list;
         this.context = context;

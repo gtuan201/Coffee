@@ -40,8 +40,6 @@ import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText email,password,rePassword,fullname;
-    private AppCompatButton btRegister;
-    private TextView login;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
 
@@ -53,9 +51,9 @@ public class RegisterActivity extends AppCompatActivity {
         fullname = findViewById(R.id.etFullnameRegister);
         password = findViewById(R.id.etPasswordRegister);
         rePassword = findViewById(R.id.etRePasswordRegister);
-        btRegister = findViewById(R.id.btRegister);
+        AppCompatButton btRegister = findViewById(R.id.btRegister);
         firebaseAuth = FirebaseAuth.getInstance();
-        login = findViewById(R.id.tvLogin);
+        TextView login = findViewById(R.id.tvLogin);
         progressDialog = new ProgressDialog(this);
         progressDialog.setCanceledOnTouchOutside(false);
         login.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +122,7 @@ public class RegisterActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
+                        firebaseAuth.signOut();
                         Toast.makeText(RegisterActivity.this,"Đăng ký thành công",Toast.LENGTH_SHORT).show();
                     }
                 })

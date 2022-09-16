@@ -21,26 +21,23 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         final SharePreferenceCheckInstall preferenceCheckInstall = new SharePreferenceCheckInstall(this);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (preferenceCheckInstall.getBooleanValue(FIRST_INSTALL)){
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                    if (user == null){
-                        startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                    }
-                    else {
-                        startActivity(new Intent(SplashActivity.this,MainActivity.class));
-                    }
-
+        new Handler().postDelayed(() -> {
+            if (preferenceCheckInstall.getBooleanValue(FIRST_INSTALL)){
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user == null){
+                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                 }
                 else {
-                    startActivity(new Intent(SplashActivity.this, OnBoardingActivity.class));
-                    preferenceCheckInstall.putBooleanInstall(FIRST_INSTALL,true);
+                    startActivity(new Intent(SplashActivity.this,MainActivity.class));
                 }
-                finish();
 
             }
+            else {
+                startActivity(new Intent(SplashActivity.this, OnBoardingActivity.class));
+                preferenceCheckInstall.putBooleanInstall(FIRST_INSTALL,true);
+            }
+            finish();
+
         }, 2200);
     }
 }

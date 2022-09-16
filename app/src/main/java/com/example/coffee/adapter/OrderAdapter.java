@@ -1,15 +1,22 @@
 package com.example.coffee.adapter;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.ColorFilter;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +35,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.FileDescriptor;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder>{
@@ -85,22 +95,23 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             holder.btCancelOrder.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new AlertDialog.Builder(context)
-                            .setTitle("Bạn có muốn hủy đơn hàng không?")
-                            .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    removeOrder(id);
-                                    dialog.cancel();
-                                }
-                            })
-                            .setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            })
-                            .show();
+                    Dialog dialog = new Dialog(context);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.setContentView(R.layout.dialog_cancel_order);
+                    Window window = dialog.getWindow();
+                    window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    WindowManager.LayoutParams windowAttribute = window.getAttributes();
+                    windowAttribute.gravity = Gravity.CENTER;
+                    window.setAttributes(windowAttribute);
+                    AppCompatButton btCancel = dialog.findViewById(R.id.bt_no);
+                    AppCompatButton btConfirm = dialog.findViewById(R.id.bt_yes);
+                    EditText etReason = dialog.findViewById(R.id.et_reason);
+                    btCancel.setOnClickListener(v1 -> dialog.dismiss());
+                    btConfirm.setOnClickListener(v12 -> {
+                        String reason = etReason.getText().toString().trim();
+                        updateOrder(dialog, order, reason);
+                    });
+                    dialog.show();
                 }
             });
         }
@@ -109,21 +120,27 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         }
     }
 
-    private void removeOrder(String id) {
+    private void updateOrder(Dialog dialog, Order order, String reason) {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+        String saveCurrentDate = currentDate.format(calendar.getTime());
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
+        String saveCurrentTime = currentTime.format(calendar.getTime());
+        HashMap<String,Object> hashMap = new HashMap<>();
+        hashMap.put("status","Đã hủy");
+        hashMap.put("reason",""+reason);
+        hashMap.put("timeCancel",saveCurrentTime +" ngày " +saveCurrentDate);
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Bill");
-        reference.child("customer").child(id)
-                .removeValue()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(context,"Đã hủy đơn hàng thành công!",Toast.LENGTH_SHORT).show();
-                    }
+        reference.child("customer").child(order.getId())
+                .updateChildren(hashMap)
+                .addOnSuccessListener(unused -> {
+                    Toast.makeText(context,"Đã hủy đơn hàng thành công",Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(context,"Hủy đơn hàng không thành công!",Toast.LENGTH_SHORT).show();
-                    }
+                .addOnFailureListener(e -> {
+                    Toast.makeText(context,"Lỗi! Vui lòng thử lại",Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
                 });
     }
 

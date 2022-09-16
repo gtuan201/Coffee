@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -28,15 +29,15 @@ import java.util.List;
 public class FavouriteActivity extends AppCompatActivity {
 
 
-    private ImageButton btBackFavourite;
     private RecyclerView rev_favourite;
     private List<Coffee> list;
     private FavouriteAdapter adapter;
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite);
-        btBackFavourite = findViewById(R.id.btBackFavourite);
+        ImageButton btBackFavourite = findViewById(R.id.btBackFavourite);
         rev_favourite = findViewById(R.id.rev_favourite);
         list = new ArrayList<>();
         LinearLayoutManager manager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
@@ -46,6 +47,7 @@ public class FavouriteActivity extends AppCompatActivity {
         rev_favourite.addItemDecoration(decoration);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User");
+        assert user != null;
         reference.child(user.getUid()).child("Favourite")
                 .addValueEventListener(new ValueEventListener() {
                     @Override

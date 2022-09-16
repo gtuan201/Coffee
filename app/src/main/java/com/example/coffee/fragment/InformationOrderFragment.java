@@ -65,7 +65,7 @@ public class InformationOrderFragment extends Fragment {
                     String date = ""+dataSnapshot.child("date").getValue();
                     String time = ""+dataSnapshot.child("time").getValue();
                     Order order = new Order();
-                    if (!status.equals("Đã hoàn thành")){
+                    if (!status.equals("Đã hoàn thành") && !status.equals("Đã hủy")){
                         order.setId(id);
                         order.setFullname(nameOrder);
                         order.setPhoneNumber(phoneOrder);

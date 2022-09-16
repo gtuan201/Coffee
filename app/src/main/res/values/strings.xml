@@ -59,4 +59,6 @@
     <string name="facebook"><a href="https://www.facebook.com/tuan.nguyxn">Facebook cá nhân : Nguyễn Giản Tuấn</a></string>
     <string name="instagram"><a href="https://www.instagram.com/_imfox_/">Instagram : _imfox_</a></string>
     <string name="github"><a href="https://github.com/gtuan201">Github :gtuan201</a></string>
+    <string name="question_cancel">Bạn có muốn hủy đơn hàng này không?</string>
+    <string name="reason_to_best">Lý do hủy có thể giúp chúng tôi cả thiện chất lượng hơn. Cảm ơn những đóng góp của bạn</string>
 </resources>

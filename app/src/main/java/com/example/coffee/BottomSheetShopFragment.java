@@ -27,7 +27,7 @@ import java.util.List;
 
 public class BottomSheetShopFragment extends BottomSheetDialogFragment {
     private List<Shop> shopList;
-    private OnItemClickListener listener;
+    private final OnItemClickListener listener;
     private ShopAdapter shopAdapter;
 
     public BottomSheetShopFragment(List<Shop> shopList, OnItemClickListener listener) {
