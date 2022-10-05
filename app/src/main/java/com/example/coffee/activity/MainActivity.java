@@ -87,4 +87,9 @@ public class MainActivity extends AppCompatActivity {
         }
         backPressedTime = System.currentTimeMillis();
     }
+    public void toMenuFragment(){
+        nav.setSelectedItemId(R.id.icon_menu);
+        fm.beginTransaction().hide(active).show(fragment_menu).commit();
+        active = fragment_menu;
+    }
 }

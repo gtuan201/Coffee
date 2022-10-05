@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.coffee.R;
+import com.example.coffee.activity.MainActivity;
 import com.example.coffee.adapter.CoffeeHomeAdapter;
 import com.example.coffee.adapter.CoffeeHomeAdapter2;
 import com.example.coffee.model.Coffee;
@@ -64,6 +66,7 @@ public class HomeFragment extends Fragment {
         rev_home2 = view.findViewById(R.id.rev_home2);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        assert user != null;
         ref.child(user.getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -162,12 +165,21 @@ public class HomeFragment extends Fragment {
         });
         //Hiển thị dữ liệu lên Slider
         addNewsSlider();
+        tvMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity activity = (MainActivity) getActivity();
+                assert activity != null;
+                activity.toMenuFragment();
+            }
+        });
         return view;
     }
 
     private void isCheckMember() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        assert user != null;
         ref.child(user.getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
